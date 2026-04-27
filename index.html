@@ -81,35 +81,43 @@
             color: white;
         }
 
-        /* Vibrant Glowing Cursor */
+        /* Revised Glowing Cursor - Clean, Fast, Non-Obstructive */
         .cursor-glow {
             position: fixed;
             top: 0; left: 0;
             width: 40px; height: 40px;
-            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            background: rgba(255, 65, 108, 0.3);
+            border: 1px solid transparent;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 10000;
-            mix-blend-mode: multiply;
-            transition: transform 0.2s ease, width 0.2s, height 0.2s;
-            filter: blur(8px);
+            backdrop-filter: blur(3px); /* Soft glass effect */
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
         }
 
         .cursor-dot {
             position: fixed;
             top: 0; left: 0;
-            width: 8px; height: 8px;
-            background: white;
+            width: 6px; height: 6px;
+            background: #0F172A;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 10001;
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
         }
 
+        /* New Hover Animation */
         .hover-active .cursor-glow {
-            transform: translate(-50%, -50%) scale(2);
-            background: linear-gradient(45deg, #00F0FF, #8A2BE2);
+            width: 70px; height: 70px;
+            background: rgba(0, 240, 255, 0.1);
+            border-color: #00F0FF;
+            backdrop-filter: blur(0px); /* Removes blur so underlying images are perfectly clear */
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .hover-active .cursor-dot {
+            background: #00F0FF;
+            width: 8px; height: 8px;
         }
 
         /* Image Masking & Shapes */
@@ -633,16 +641,19 @@
         const cursorDot = document.getElementById('cursor-dot');
         const interactives = document.querySelectorAll('.interactive');
 
+        // Perfectly centered GSAP defaults
+        gsap.set(cursorGlow, { xPercent: -50, yPercent: -50 });
+        gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
+
         window.addEventListener('mousemove', (e) => {
             // Immediate follow for dot
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0 });
             
-            // Smooth follow for glow
+            // Much faster, snappier follow for glow (duration reduced to 0.08)
             gsap.to(cursorGlow, {
                 x: e.clientX,
                 y: e.clientY,
-                duration: 0.15,
+                duration: 0.08,
                 ease: "power2.out"
             });
         });
