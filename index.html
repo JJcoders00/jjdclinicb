@@ -795,37 +795,57 @@
           .fromTo(".gs-hero-text", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, "-=0.6")
           .fromTo(".gs-hero-img", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 }, "-=0.8");
 
-        // WhatsApp Booking Logic
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const service = document.getElementById('service').value;
-            const date = document.getElementById('date').value;
-            const message = document.getElementById('message').value;
+        // WhatsApp Booking Logic + Local Storage Save
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const service = document.getElementById('service').value;
+    const date = document.getElementById('date').value;
+    const message = document.getElementById('message').value;
 
-            const targetNumber = "918610796218";
-            
-            const waText = `✨ *JJ Clinic - VIP Consultation* ✨%0A%0A` +
-                           `👤 *Name:* ${name}%0A` +
-                           `📱 *Phone:* ${phone}%0A` +
-                           `💎 *Focus:* ${service}%0A` +
-                           `📅 *Date:* ${date}%0A` +
-                           `💬 *Story:* ${message ? message : 'N/A'}`;
+    // --- NEW: SAVE DATA FOR ADMIN.HTML ---
+    const newBooking = {
+        id: Date.now(),
+        name: name,
+        phone: phone,
+        service: service,
+        preferredDate: date,
+        message: message,
+        submittedAt: new Date().toLocaleString()
+    };
 
-            window.open(`https://wa.me/${targetNumber}?text=${waText}`, '_blank');
-            
-            const btn = this.querySelector('button[type="submit"]');
-            const ogContent = btn.innerHTML;
-            btn.innerHTML = '<span>Opening WhatsApp...</span><i class="fa-solid fa-spinner fa-spin ml-3"></i>';
-            setTimeout(() => {
-                this.reset();
-                formSelects.forEach(el => el.classList.add('text-slate-500'));
-                btn.innerHTML = '<span>Request Sent!</span><i class="fa-solid fa-check ml-3"></i>';
-                setTimeout(() => btn.innerHTML = ogContent, 3000);
-            }, 1500);
-        });
+    // Retrieve old leads and add the new one to the top
+    const existingBookings = JSON.parse(localStorage.getItem('jj_clinic_bookings')) || [];
+    existingBookings.unshift(newBooking);
+    localStorage.setItem('jj_clinic_bookings', JSON.stringify(existingBookings));
+    // --------------------------------------
+
+    const targetNumber = "918610796218";
+    
+    const waText = `✨ *JJ Clinic - VIP Consultation* ✨%0A%0A` +
+                   `👤 *Name:* ${name}%0A` +
+                   `📱 *Phone:* ${phone}%0A` +
+                   `💎 *Focus:* ${service}%0A` +
+                   `📅 *Date:* ${date}%0A` +
+                   `💬 *Story:* ${message ? message : 'N/A'}`;
+
+    window.open(`https://wa.me/${targetNumber}?text=${waText}`, '_blank');
+    
+    const btn = this.querySelector('button[type="submit"]');
+    const ogContent = btn.innerHTML;
+    
+    // UI Feedback: Show it's saving
+    btn.innerHTML = '<span>Saving to Ledger...</span><i class="fa-solid fa-spinner fa-spin ml-3"></i>';
+    
+    setTimeout(() => {
+        this.reset();
+        formSelects.forEach(el => el.classList.add('text-slate-500'));
+        btn.innerHTML = '<span>Saved & Sent!</span><i class="fa-solid fa-check ml-3"></i>';
+        setTimeout(() => btn.innerHTML = ogContent, 3000);
+    }, 1500);
+});
     </script>
 </body>
 </html>
