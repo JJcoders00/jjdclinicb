@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJ D Clinic | Vibrant & Advanced Dermatology</title>
+    
+    <!-- Modern, Bold Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#FF416C',
+                            peach: '#FF4B2B',
+                            purple: '#8A2BE2',
+                            cyan: '#00F0FF',
+                            dark: '#0F172A',
+                            light: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Immersive Styles -->
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #0F172A;
+            background-color: #F8FAFC;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Animated Colorful Mesh Gradient Background */
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2;
+            background: 
+                radial-gradient(at 0% 0%, hsla(339, 100%, 85%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(274, 100%, 85%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(189, 100%, 85%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(16, 100%, 85%, 1) 0px, transparent 50%);
+            animation: breathe 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1); filter: hue-rotate(0deg); }
+            100% { transform: scale(1.1); filter: hue-rotate(45deg); }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Vibrant Glowing Cursor */
+        .cursor-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 40px; height: 40px;
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: multiply;
+            transition: transform 0.2s ease, width 0.2s, height 0.2s;
+            filter: blur(8px);
+        }
+
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10001;
+        }
+
+        .hover-active .cursor-glow {
+            transform: translate(-50%, -50%) scale(2);
+            background: linear-gradient(45deg, #00F0FF, #8A2BE2);
+        }
+
+        /* Image Masking & Shapes */
+        .organic-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+
+        /* Colorful Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #FF416C, #8A2BE2, #00F0FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Visual Card Hover Effect */
+        .visual-card {
+            overflow: hidden;
+            border-radius: 2rem;
+            position: relative;
+        }
+        
+        .visual-card img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .visual-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .visual-card .overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .visual-card:hover .overlay {
+            opacity: 1;
+            background: linear-gradient(to top, #8A2BE2 0%, rgba(255,65,108,0.4) 100%);
+        }
+
+        /* Floating elements */
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delayed { animation: float 6s ease-in-out infinite 3s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Custom Input */
+        .color-input {
+            width: 100%;
+            background: rgba(255,255,255,0.6);
+            border: 2px solid transparent;
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .color-input:focus {
+            background: white;
+            border-color: #FF416C;
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.2);
+        }
+
+        /* FAQ Accordion Reset */
+        details > summary {
+            list-style: none;
+            cursor: none; /* Let custom cursor handle it */
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Elements -->
+    <div class="mesh-bg"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <!-- Glass Floating Navigation -->
+    <nav class="fixed w-full z-50 top-4 px-4 md:px-8 flex justify-center">
+        <div class="glass rounded-full px-8 py-4 flex items-center justify-between w-full max-w-6xl shadow-xl">
+            <div class="text-2xl font-extrabold text-brand-dark interactive">
+                JJ<span class="text-brand-pink">D</span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-semibold text-sm">
+                <a href="#hero" class="hover:text-brand-pink transition-colors interactive">Home</a>
+                <a href="#signature" class="hover:text-brand-purple transition-colors interactive">Treatments</a>
+                <a href="#doctor" class="hover:text-brand-cyan transition-colors interactive">Dr. Johan</a>
+                <a href="#testimonials" class="hover:text-brand-peach transition-colors interactive">Reviews</a>
+            </div>
+            <a href="#booking" class="bg-brand-dark text-white px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,0,0,0.2)] interactive">
+                Book Now
+            </a>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: Immersive Hero -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-24 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <!-- Text Content -->
+            <div class="order-2 md:order-1 gs-fade-up">
+                <div class="inline-block glass px-4 py-2 rounded-full text-brand-purple font-bold text-sm mb-6 border border-white shadow-sm">
+                    <i class="fa-solid fa-sparkles mr-2"></i> Next-Gen Dermatology
+                </div>
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight mb-6 tracking-tight">
+                    Radiate <br>
+                    <span class="text-gradient">Pure Energy.</span>
+                </h1>
+                <p class="text-lg md:text-xl font-medium text-gray-700 mb-8 max-w-md">
+                    Immerse yourself in a world where advanced science meets stunning, vibrant aesthetics. Reveal your most colorful self.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#booking" class="bg-gradient-to-r from-brand-pink to-brand-peach text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-[0_0_30px_rgba(255,65,108,0.5)] transition-all interactive">
+                        Start Journey <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#signature" class="glass text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all interactive shadow-sm">
+                        Explore
+                    </a>
+                </div>
+            </div>
+
+            <!-- Immersive Visual -->
+            <div class="order-1 md:order-2 relative h-[50vh] md:h-[80vh] flex items-center justify-center gs-fade-left">
+                <!-- Colorful Floating Orbs behind image -->
+                <div class="absolute w-64 h-64 bg-brand-cyan rounded-full mix-blend-multiply filter blur-3xl opacity-70 float top-10 left-10"></div>
+                <div class="absolute w-64 h-64 bg-brand-pink rounded-full mix-blend-multiply filter blur-3xl opacity-70 float-delayed bottom-10 right-10"></div>
+                
+                <!-- Main Organic Image -->
+                <div class="relative w-full h-full max-w-md mx-auto organic-shape overflow-hidden shadow-2xl interactive">
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Glowing Skin" class="w-full h-full object-cover">
+                    <!-- Glass overlay badge -->
+                    <div class="absolute bottom-8 left-8 glass rounded-2xl p-4 flex items-center space-x-4 border-white/50">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-cyan to-brand-purple flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">FDA Approved</p>
+                            <p class="text-xs font-medium text-gray-800">Advanced Tech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Impact Stats Strip -->
+    <section class="py-12 px-6 relative z-20 -mt-12">
+        <div class="max-w-7xl mx-auto glass rounded-3xl p-8 shadow-2xl border-2 border-white gs-fade-up flex flex-wrap justify-around items-center gap-8 text-center">
+            <div class="interactive">
+                <h3 class="text-4xl font-extrabold text-brand-dark mb-1">10k<span class="text-brand-pink">+</span></h3>
+                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider">Glowing Clients</p>
+            </div>
+            <div class="hidden md:block w-px h-16 bg-gray-300"></div>
+            <div class="interactive">
+                <h3 class="text-4xl font-extrabold text-brand-dark mb-1">15<span class="text-brand-cyan">+</span></h3>
+                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider">Tech Systems</p>
+            </div>
+            <div class="hidden md:block w-px h-16 bg-gray-300"></div>
+            <div class="interactive">
+                <h3 class="text-4xl font-extrabold text-brand-dark mb-1">100<span class="text-brand-purple">%</span></h3>
+                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider">Bespoke Care</p>
+            </div>
+            <div class="hidden md:block w-px h-16 bg-gray-300"></div>
+            <div class="interactive">
+                <h3 class="text-4xl font-extrabold text-brand-dark mb-1">50<span class="text-brand-peach">+</span></h3>
+                <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider">Global Awards</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Signature Treatments (Content Rich Zig-Zag) -->
+    <section id="signature" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 gs-fade-up">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-4">Signature <span class="text-brand-pink">Treatments</span></h2>
+                <p class="text-xl font-medium text-gray-700 max-w-2xl mx-auto">Discover our transformative protocols. We combine deep cellular science with elite aesthetic machinery for unmatched results.</p>
+            </div>
+
+            <!-- Treatment 1 (Image Left, Text Right) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-24">
+                <div class="relative gs-fade-right interactive group">
+                    <div class="absolute inset-0 bg-brand-cyan rounded-[3rem] transform -rotate-6 scale-105 opacity-50 blur-lg group-hover:rotate-0 transition-all duration-500"></div>
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop" alt="Laser Skin Resurfacing" class="relative rounded-[3rem] w-full h-[500px] object-cover shadow-xl border-4 border-white">
+                </div>
+                <div class="gs-fade-left">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-4xl font-extrabold mb-6">Luminous Laser Resurfacing</h3>
+                    <p class="text-lg font-medium text-gray-700 mb-6 leading-relaxed">
+                        Erase years of sun damage, hyperpigmentation, and uneven texture in a single session. Our advanced fractional light arrays target deep dermal layers to trigger massive collagen production.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-cyan mr-3"></i> Shrinks enlarged pores</li>
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-cyan mr-3"></i> Eradicates stubborn dark spots</li>
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-cyan mr-3"></i> Zero downtime protocol available</li>
+                    </ul>
+                    <a href="#booking" class="text-brand-dark font-bold text-lg border-b-2 border-brand-cyan pb-1 hover:text-brand-cyan transition-colors interactive">Request Consultation <i class="fa-solid fa-chevron-right text-sm ml-1"></i></a>
+                </div>
+            </div>
+
+            <!-- Treatment 2 (Text Left, Image Right) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 gs-fade-right">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-purple/20 text-brand-purple flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-dna"></i>
+                    </div>
+                    <h3 class="text-4xl font-extrabold mb-6">Bio-Cellular Sculpting</h3>
+                    <p class="text-lg font-medium text-gray-700 mb-6 leading-relaxed">
+                        A masterclass in facial architecture. Using a precise combination of neuromodulators and biostimulators, we restore lost volume and lift sagging tissues without the frozen look.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-purple mr-3"></i> Non-surgical jawline contouring</li>
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-purple mr-3"></i> Dynamic wrinkle relaxation</li>
+                        <li class="flex items-center text-gray-800 font-semibold"><i class="fa-solid fa-circle-check text-brand-purple mr-3"></i> Results last up to 24 months</li>
+                    </ul>
+                    <a href="#booking" class="text-brand-dark font-bold text-lg border-b-2 border-brand-purple pb-1 hover:text-brand-purple transition-colors interactive">Request Consultation <i class="fa-solid fa-chevron-right text-sm ml-1"></i></a>
+                </div>
+                <div class="order-1 md:order-2 relative gs-fade-left interactive group">
+                    <div class="absolute inset-0 bg-brand-purple rounded-[3rem] transform rotate-6 scale-105 opacity-50 blur-lg group-hover:rotate-0 transition-all duration-500"></div>
+                    <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=1000&auto=format&fit=crop" alt="Facial Sculpting" class="relative rounded-[3rem] w-full h-[500px] object-cover shadow-xl border-4 border-white">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: The Pillars (Visual Grid) -->
+    <section class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gs-fade-up">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-4">Our Core <span class="text-brand-cyan">Pillars</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Visual 1 -->
+                <div class="visual-card h-80 group interactive gs-fade-up">
+                    <img src="https://images.unsplash.com/photo-1554050857-c84a8abdb5e5?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Serum">
+                    <div class="overlay absolute inset-0"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
+                        <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 text-2xl group-hover:bg-brand-pink transition-colors">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Liquid Restoration</h3>
+                        <p class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">Deep cellular hydration using pure active ingredients.</p>
+                    </div>
+                </div>
+                
+                <!-- Visual 2 -->
+                <div class="visual-card h-80 group interactive gs-fade-up" style="animation-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Laser">
+                    <div class="overlay absolute inset-0"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
+                        <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 text-2xl group-hover:bg-brand-cyan transition-colors">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Energy Devices</h3>
+                        <p class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">Cutting-edge light therapy for instant glow.</p>
+                    </div>
+                </div>
+
+                <!-- Visual 3 -->
+                <div class="visual-card h-80 group interactive gs-fade-up" style="animation-delay: 0.4s;">
+                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Sculpting">
+                    <div class="overlay absolute inset-0"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
+                        <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 text-2xl group-hover:bg-brand-purple transition-colors">
+                            <i class="fa-solid fa-face-smile-beam"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Structural Balance</h3>
+                        <p class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">Vibrant, natural enhancements that elevate features.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Dr Johan / The Mastermind -->
+    <section id="doctor" class="py-24 px-6 relative overflow-hidden">
+        <!-- Huge Background Text -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[15vw] font-extrabold text-brand-dark/5 whitespace-nowrap z-0 pointer-events-none">
+            MASTERMIND
+        </div>
+        
+        <div class="max-w-6xl mx-auto glass-dark rounded-[3rem] p-8 md:p-16 relative z-10 shadow-2xl gs-fade-up">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative group interactive">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-pink to-brand-cyan rounded-[2rem] blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <!-- Updated Doctor Image -->
+                    <img src="https://jjcoders.web.app/johan.png" alt="Dr Johan" class="relative rounded-[2rem] w-full h-[500px] object-cover object-top border-4 border-white/10 bg-gradient-to-b from-brand-dark to-brand-purple/20">
+                    
+                    <div class="absolute bottom-6 right-6 bg-brand-peach text-white p-4 rounded-2xl font-bold shadow-lg transform rotate-3">
+                        Chief Director
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="text-5xl md:text-6xl font-extrabold mb-6">Meet <span class="text-brand-cyan">Dr. Johan</span></h2>
+                    <p class="text-xl font-medium mb-6 text-gray-300 leading-relaxed">
+                        "Skin isn't a blank canvas; it's a living, breathing, colorful masterpiece. Let's make it vibrant."
+                    </p>
+                    <ul class="space-y-4 mb-8 font-medium">
+                        <li class="flex items-center"><i class="fa-solid fa-star text-brand-pink mr-4 text-xl w-6"></i> Board Certified Dermatologist</li>
+                        <li class="flex items-center"><i class="fa-solid fa-star text-brand-cyan mr-4 text-xl w-6"></i> Global Aesthetic Innovator</li>
+                        <li class="flex items-center"><i class="fa-solid fa-star text-brand-purple mr-4 text-xl w-6"></i> Creator of the "JJ Glow Protocol"</li>
+                    </ul>
+                    <a href="#booking" class="inline-block bg-white text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-cyan hover:text-white transition-colors interactive shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        Consult with Dr. Johan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Client Testimonials -->
+    <section id="testimonials" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gs-fade-up">
+                <h2 class="text-5xl md:text-6xl font-extrabold mb-4">Radiant <span class="text-brand-peach">Reviews</span></h2>
+                <p class="text-xl font-medium text-gray-700">Real stories from our transformed clients.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass p-8 rounded-3xl gs-fade-up interactive border border-white hover:-translate-y-2 transition-transform duration-300">
+                    <div class="text-brand-peach text-2xl mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-800 font-medium text-lg mb-6 italic">"Dr. Johan completely changed my skin texture. The laser precision treatment was painless, and I haven't worn foundation in months!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-brand-pink to-brand-peach rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">S</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-dark">Sarah Jenkins</h4>
+                            <p class="text-sm text-gray-600 font-semibold">Laser Resurfacing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass p-8 rounded-3xl gs-fade-up interactive border border-white hover:-translate-y-2 transition-transform duration-300 delay-100">
+                    <div class="text-brand-peach text-2xl mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-800 font-medium text-lg mb-6 italic">"I wanted a very subtle lift without looking 'done'. The aesthetic sculpting here is true art. Highly recommend the JJ clinic."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-brand-purple to-brand-cyan rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">E</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-dark">Elena R.</h4>
+                            <p class="text-sm text-gray-600 font-semibold">Bio-Cellular Sculpting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass p-8 rounded-3xl gs-fade-up interactive border border-white hover:-translate-y-2 transition-transform duration-300 delay-200">
+                    <div class="text-brand-peach text-2xl mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-800 font-medium text-lg mb-6 italic">"The facility feels like a futuristic spa. From the moment you walk in, it's 5-star service. My cystic acne is completely gone."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-r from-brand-cyan to-brand-pink rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">M</div>
+                        <div>
+                            <h4 class="font-extrabold text-brand-dark">Michael T.</h4>
+                            <p class="text-sm text-gray-600 font-semibold">Clinical Dermatology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ (Content Rich Accordion) -->
+    <section class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 gs-fade-up">
+                <h2 class="text-5xl font-extrabold mb-4">Common <span class="text-brand-purple">Questions</span></h2>
+            </div>
+            
+            <div class="space-y-4 gs-fade-up">
+                <!-- FAQ 1 -->
+                <details class="glass rounded-2xl border border-white overflow-hidden group interactive">
+                    <summary class="p-6 font-extrabold text-xl text-brand-dark flex justify-between items-center bg-white/30 hover:bg-white/50 transition-colors">
+                        How many laser sessions will I need?
+                        <i class="fa-solid fa-plus text-brand-pink group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-700 font-medium leading-relaxed">
+                        While many clients see a massive "glow up" after just one session, we typically recommend a protocol of 3 to 6 sessions spaced a month apart for profound, structural collagen rebuilding and deep pigment removal.
+                    </div>
+                </details>
+
+                <!-- FAQ 2 -->
+                <details class="glass rounded-2xl border border-white overflow-hidden group interactive">
+                    <summary class="p-6 font-extrabold text-xl text-brand-dark flex justify-between items-center bg-white/30 hover:bg-white/50 transition-colors">
+                        Is there downtime for Bio-Cellular Sculpting?
+                        <i class="fa-solid fa-plus text-brand-purple group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-700 font-medium leading-relaxed">
+                        There is minimal to zero downtime. You might experience slight swelling or bruising at the injection sites for 24-48 hours, but the vast majority of our patients return to their regular social activities immediately.
+                    </div>
+                </details>
+
+                <!-- FAQ 3 -->
+                <details class="glass rounded-2xl border border-white overflow-hidden group interactive">
+                    <summary class="p-6 font-extrabold text-xl text-brand-dark flex justify-between items-center bg-white/30 hover:bg-white/50 transition-colors">
+                        What makes Dr. Johan's technique different?
+                        <i class="fa-solid fa-plus text-brand-cyan group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="p-6 pt-0 text-gray-700 font-medium leading-relaxed">
+                        Dr. Johan focuses on "undecteable enhancements." Instead of freezing the face or overfilling, he uses advanced micro-dosing and targeted deep-plane structural support so you look refreshed, vibrant, and entirely natural.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Immersive Booking System (WhatsApp) -->
+    <section id="booking" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto gs-fade-up">
+            <div class="glass rounded-3xl p-8 md:p-16 border-2 border-white relative overflow-hidden shadow-2xl">
+                
+                <!-- Decorative colorful blobs inside the form container -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand-pink rounded-full blur-3xl opacity-30 pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-purple rounded-full blur-3xl opacity-30 pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="text-center mb-12">
+                        <h2 class="text-5xl font-extrabold mb-4">Claim Your <span class="text-gradient">Glow.</span></h2>
+                        <p class="text-lg font-medium text-gray-700">Direct, instant booking via WhatsApp.</p>
+                    </div>
+
+                    <form id="bookingForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="interactive">
+                                <input type="text" id="name" required class="color-input" placeholder="Your Name">
+                            </div>
+                            <div class="interactive">
+                                <input type="tel" id="phone" required class="color-input" placeholder="Phone Number">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="interactive">
+                                <select id="service" required class="color-input text-gray-600 cursor-pointer">
+                                    <option value="" disabled selected>Select Your Treatment</option>
+                                    <option value="Liquid Restoration (Hydration)">Liquid Restoration (Hydration)</option>
+                                    <option value="Luminous Laser Resurfacing">Luminous Laser Resurfacing</option>
+                                    <option value="Bio-Cellular Sculpting">Bio-Cellular Sculpting</option>
+                                    <option value="Dr. Johan VIP Consult">Dr. Johan VIP Consult</option>
+                                </select>
+                            </div>
+                            <div class="interactive">
+                                <input type="date" id="date" required class="color-input text-gray-600 cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="interactive">
+                            <textarea id="message" rows="3" class="color-input resize-none" placeholder="What are your skin goals? Let's make them happen..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-brand-pink via-brand-purple to-brand-cyan text-white text-xl font-bold py-5 rounded-xl hover:shadow-[0_0_40px_rgba(138,43,226,0.6)] transition-all interactive flex justify-center items-center group">
+                            <span>Send to WhatsApp</span>
+                            <i class="fa-brands fa-whatsapp text-3xl ml-4 group-hover:scale-125 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white py-12 px-6 border-t-[10px] border-brand-pink relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-cyan rounded-full filter blur-[100px] opacity-20 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+            <div>
+                <div class="text-3xl font-extrabold mb-2">JJ<span class="text-brand-pink">D</span> CLINIC</div>
+                <p class="text-gray-400 font-medium text-sm">Where Science Meets Vibrant Artistry.</p>
+            </div>
+            
+            <div class="flex gap-6 text-2xl">
+                <a href="#" class="hover:text-brand-pink transition-colors interactive"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-cyan transition-colors interactive"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="hover:text-brand-peach transition-colors interactive"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+            <div class="text-right text-gray-400 font-medium text-sm">
+                <p>+91 861 079 6218</p>
+                <p>&copy; 2026 JJ Coders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Immersive Vibrant Custom Cursor
+        const cursorGlow = document.getElementById('cursor-glow');
+        const cursorDot = document.getElementById('cursor-dot');
+        const interactives = document.querySelectorAll('.interactive');
+
+        window.addEventListener('mousemove', (e) => {
+            // Immediate follow for dot
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            
+            // Smooth follow for glow
+            gsap.to(cursorGlow, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.15,
+                ease: "power2.out"
+            });
+        });
+
+        // Hover states for cursor
+        interactives.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.classList.add('hover-active');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hover-active');
+            });
+        });
+
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade Up Animations
+        const fadeUpElements = document.querySelectorAll('.gs-fade-up');
+        fadeUpElements.forEach((el, index) => {
+            gsap.fromTo(el, 
+                { y: 60, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Fade Left Animation 
+        const fadeLeftElements = document.querySelectorAll('.gs-fade-left');
+        fadeLeftElements.forEach((el) => {
+            gsap.fromTo(el, 
+                { x: 100, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Fade Right Animation
+        const fadeRightElements = document.querySelectorAll('.gs-fade-right');
+        fadeRightElements.forEach((el) => {
+            gsap.fromTo(el, 
+                { x: -100, opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // WhatsApp Booking Form Logic
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const message = document.getElementById('message').value;
+
+            const targetNumber = "918610796218";
+            
+            const waText = `✨ *JJ D Clinic - New VIP Inquiry* ✨%0A%0A` +
+                           `👤 *Name:* ${name}%0A` +
+                           `📱 *Phone:* ${phone}%0A` +
+                           `💎 *Treatment:* ${service}%0A` +
+                           `📅 *Preferred Date:* ${date}%0A` +
+                           `💬 *Goals:* ${message ? message : 'N/A'}`;
+
+            // Open WhatsApp
+            window.open(`https://wa.me/${targetNumber}?text=${waText}`, '_blank');
+            
+            // Add a cool button animation on submit
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span>Processing...</span><i class="fa-solid fa-spinner fa-spin ml-4"></i>';
+            setTimeout(() => {
+                this.reset();
+                btn.innerHTML = '<span>Sent to WhatsApp!</span><i class="fa-solid fa-check ml-4"></i>';
+                setTimeout(() => {
+                    btn.innerHTML = '<span>Send to WhatsApp</span><i class="fa-brands fa-whatsapp text-3xl ml-4 group-hover:scale-125 transition-transform"></i>';
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
