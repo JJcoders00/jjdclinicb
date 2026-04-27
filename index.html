@@ -45,7 +45,7 @@
             color: #0f172a;
             overflow-x: hidden;
             background-color: #f8fafc;
-            cursor: none; /* Custom cursor applied */
+            cursor: none;
         }
 
         /* 1. Dynamic Aurora Background */
@@ -55,10 +55,10 @@
             width: 100vw; height: 100vh;
             z-index: -1;
             background: 
-                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.4), transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(251, 194, 235, 0.4), transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(161, 140, 209, 0.4), transparent 50%),
-                radial-gradient(circle at 80% 90%, rgba(255, 154, 158, 0.4), transparent 50%);
+                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.35), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(251, 194, 235, 0.35), transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(161, 140, 209, 0.35), transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(255, 154, 158, 0.35), transparent 50%);
             filter: blur(60px);
             animation: auroraDrift 20s ease-in-out infinite alternate;
         }
@@ -69,12 +69,12 @@
             100% { transform: scale(1.05) rotate(-5deg); }
         }
 
-        /* Subtle noise texture over background */
+        /* Subtle noise texture */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
-            opacity: 0.2;
+            opacity: 0.25;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             pointer-events: none;
         }
@@ -82,20 +82,21 @@
         /* 2. Advanced Glassmorphism */
         .glass-panel {
             background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 10px 40px -10px rgba(31, 38, 135, 0.1);
         }
 
         .glass-dark {
             background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.3);
         }
 
-        /* 3. Custom Cursor (Non-obstructive glowing ring) */
+        /* 3. Custom Cursor */
         .cursor-ring {
             position: fixed;
             top: 0; left: 0;
@@ -127,19 +128,51 @@
         }
         .hover-active .cursor-dot { background: #00f2fe; }
 
-        /* 4. Creative Image Masks & Visuals */
-        .img-mask {
-            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45,5 C70,0 95,20 100,50 C105,80 80,100 50,100 C20,100 0,80 0,50 C0,20 20,10 45,5 Z'/%3E%3C/svg%3E");
-            mask-size: cover;
-            mask-repeat: no-repeat;
-            mask-position: center;
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45,5 C70,0 95,20 100,50 C105,80 80,100 50,100 C20,100 0,80 0,50 C0,20 20,10 45,5 Z'/%3E%3C/svg%3E");
-            -webkit-mask-size: cover;
-            -webkit-mask-repeat: no-repeat;
-            -webkit-mask-position: center;
+        /* 4. Shape Changing Animation (Applied to Hero Doctor) */
+        .organic-shape {
+            animation: morph 8s ease-in-out infinite alternate;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transition: all 1s ease-in-out;
         }
 
-        /* 5. Rich Service Cards */
+        .organic-shape-bg {
+            animation: morphReverse 10s ease-in-out infinite alternate;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        @keyframes morphReverse {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            50% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        }
+
+        /* Colorful Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #4facfe, #a18cd1, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 4s linear infinite;
+        }
+        @keyframes textShine { to { background-position: 200% center; } }
+
+        /* Floating elements */
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delayed { animation: float 6s ease-in-out infinite 3s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Rich Service Cards */
         .service-card {
             overflow: hidden;
             border-radius: 2rem;
@@ -160,16 +193,6 @@
             background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(161, 140, 209, 0.6) 100%);
         }
 
-        /* Colorful Text Gradient */
-        .text-gradient {
-            background: linear-gradient(to right, #4facfe, #a18cd1, #fbc2eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: textShine 4s linear infinite;
-        }
-        @keyframes textShine { to { background-position: 200% center; } }
-
         /* Form Inputs */
         .form-input {
             width: 100%;
@@ -188,9 +211,6 @@
             border-color: #a18cd1;
             box-shadow: 0 0 0 4px rgba(161, 140, 209, 0.2);
         }
-
-        /* Hide details marker */
-        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -205,14 +225,15 @@
 
     <!-- Floating Glass Navigation -->
     <nav class="fixed w-full z-50 top-6 px-4 md:px-8 flex justify-center gs-nav">
-        <div class="glass-panel rounded-full px-8 py-4 flex items-center justify-between w-full max-w-6xl transition-all duration-300 hover:bg-white/80">
+        <div class="glass-panel rounded-full px-8 py-4 flex items-center justify-between w-full max-w-7xl transition-all duration-300 hover:bg-white/80">
             <div class="text-2xl font-display font-bold text-dark interactive flex items-center gap-2 tracking-tight">
-                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-aurora-cyan to-aurora-purple text-white flex items-center justify-center text-sm">JJ</span>
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-aurora-cyan to-aurora-purple text-white flex items-center justify-center text-sm shadow-md">JJ</span>
                 Clinic.
             </div>
             <div class="hidden md:flex space-x-10 font-medium text-sm text-slate-700">
                 <a href="#hero" class="hover:text-aurora-purple transition-colors interactive">Vision</a>
-                <a href="#doctor" class="hover:text-aurora-purple transition-colors interactive">Dr. Johan</a>
+                <a href="#process" class="hover:text-aurora-purple transition-colors interactive">Our Process</a>
+                <a href="#tech" class="hover:text-aurora-purple transition-colors interactive">Technology</a>
                 <a href="#services" class="hover:text-aurora-purple transition-colors interactive">Treatments</a>
                 <a href="#testimonials" class="hover:text-aurora-purple transition-colors interactive">Stories</a>
             </div>
@@ -222,130 +243,216 @@
         </div>
     </nav>
 
-    <!-- SECTION 1: Creative Immersive Hero -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+    <!-- SECTION 1: Creative Immersive Hero (Giant Shape-Changing Doctor) -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-12 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 w-full">
             
             <!-- Text Content -->
-            <div class="order-2 md:order-1 gs-hero-text">
-                <div class="inline-flex items-center glass-panel px-5 py-2 rounded-full text-dark font-bold text-xs tracking-widest uppercase mb-6 shadow-sm border-white/50">
+            <div class="lg:col-span-6 order-2 lg:order-1 gs-hero-text z-20">
+                <div class="inline-flex items-center glass-panel px-4 py-2 rounded-full text-dark font-bold text-xs tracking-widest uppercase mb-4 shadow-sm border-white/50">
                     <span class="w-2 h-2 rounded-full bg-aurora-cyan mr-3 animate-pulse"></span>
-                    The Art of Dermatology
+                    Dr. Johan Aesthetics
                 </div>
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-display font-extrabold leading-[1.05] mb-6 text-dark tracking-tight">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] mb-5 text-dark tracking-tight">
                     Where Skin <br>
                     Meets <span class="text-gradient">Color.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-slate-700 mb-10 max-w-md leading-relaxed font-medium">
-                    We transcend traditional clinical care. Experience a symphony of medical precision, vibrant aesthetics, and cellular renewal.
+                <p class="text-base md:text-lg text-slate-700 mb-8 max-w-md leading-relaxed font-medium">
+                    Led by Dr. Johan, we transcend traditional clinical care. Experience a symphony of medical precision, vibrant aesthetics, and deep cellular renewal.
                 </p>
                 <div class="flex flex-wrap gap-4 items-center">
-                    <a href="#booking" class="bg-gradient-to-r from-aurora-purple to-aurora-blue text-white px-8 py-4 rounded-full font-bold text-base hover:shadow-[0_10px_30px_rgba(161,140,209,0.5)] hover:-translate-y-1 transition-all interactive flex items-center">
+                    <a href="#booking" class="bg-gradient-to-r from-aurora-purple to-aurora-blue text-white px-8 py-3.5 rounded-full font-bold text-sm hover:shadow-[0_10px_30px_rgba(161,140,209,0.5)] hover:-translate-y-1 transition-all interactive flex items-center">
                         Begin Transformation <i class="fa-solid fa-arrow-right ml-3"></i>
                     </a>
-                    <div class="flex items-center gap-4 ml-4">
+                    <div class="flex items-center gap-3 ml-2 mt-4 sm:mt-0">
                         <div class="flex -space-x-3">
-                            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Client">
-                            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt="Client">
-                            <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Client">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Client">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt="Client">
+                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Client">
                         </div>
-                        <span class="text-sm font-bold text-dark">10k+ Glowing Clients</span>
+                        <span class="text-xs font-bold text-dark">10k+ Happy Patients</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Visual Creative Layout -->
-            <div class="order-1 md:order-2 relative h-[50vh] md:h-[70vh] flex items-center justify-center gs-hero-img">
-                <!-- Abstract floating blobs -->
-                <div class="absolute top-0 right-10 w-32 h-32 bg-aurora-pink rounded-full blur-2xl opacity-60 float interactive"></div>
-                <div class="absolute bottom-10 left-0 w-40 h-40 bg-aurora-cyan rounded-full blur-2xl opacity-60 float-delayed interactive"></div>
+            <!-- Visual Creative Layout (Shape-Changing Doctor) -->
+            <div class="lg:col-span-6 order-1 lg:order-2 relative flex items-center justify-center gs-hero-img w-full">
                 
-                <!-- Centerpiece Image -->
-                <div class="relative w-full max-w-sm mx-auto interactive group">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-aurora-purple to-aurora-pink rounded-[3rem] transform rotate-6 scale-105 opacity-30 group-hover:rotate-12 transition-all duration-700"></div>
-                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1000&auto=format&fit=crop" 
-                         alt="Glowing Skin" class="relative z-10 w-full aspect-[4/5] object-cover rounded-[3rem] shadow-[0_20px_50px_rgba(15,23,42,0.2)] border-4 border-white/50">
+                <!-- Centerpiece Doctor Image with Morphing Animation -->
+                <div class="relative w-full max-w-[360px] md:max-w-[420px] mx-auto interactive group flex items-center justify-center">
+                    <!-- Morphing glowing background -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-aurora-purple via-aurora-cyan to-aurora-pink organic-shape-bg opacity-50 blur-xl scale-110 group-hover:opacity-70 transition-opacity duration-500"></div>
+                    
+                    <!-- Doctor Image with Morphing border-radius -->
+                    <div class="relative z-10 w-full aspect-[4/5] organic-shape overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.2)] border-[6px] border-white/60 bg-gradient-to-b from-white/40 to-aurora-purple/10 backdrop-blur-md flex items-end">
+                        <img src="https://jjcoders.web.app/johan.png" 
+                             alt="Dr Johan" class="w-full h-full object-cover object-top mix-blend-multiply opacity-90 scale-105 group-hover:scale-110 transition-transform duration-700">
+                    </div>
                     
                     <!-- Floating Glass Tag -->
-                    <div class="absolute -left-8 top-1/4 glass-panel rounded-2xl p-4 shadow-xl z-20 flex items-center gap-3 parallax-tag border-white/60">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-aurora-cyan to-aurora-blue flex justify-center items-center text-white">
-                            <i class="fa-solid fa-microscope"></i>
+                    <div class="absolute -left-4 md:-left-10 top-1/4 glass-panel rounded-2xl p-3 shadow-xl z-20 flex items-center gap-3 parallax-tag border-white/60">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-aurora-cyan to-aurora-blue flex justify-center items-center text-white text-lg">
+                            <i class="fa-solid fa-stethoscope"></i>
                         </div>
-                        <div class="pr-2">
-                            <p class="text-xs font-bold text-slate-500 uppercase">Technology</p>
-                            <p class="text-sm font-bold text-dark">FDA Approved</p>
+                        <div class="pr-3">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Chief Director</p>
+                            <p class="text-sm font-bold text-dark">Dr. Johan</p>
                         </div>
+                    </div>
+
+                    <!-- Floating Stat Tag -->
+                    <div class="absolute -right-4 bottom-1/4 glass-dark rounded-2xl p-3 shadow-xl z-20 flex flex-col items-center justify-center parallax-tag-reverse border-white/20 w-20 h-20">
+                        <p class="text-xl font-display font-bold text-aurora-cyan">20+</p>
+                        <p class="text-[9px] font-bold text-gray-300 uppercase tracking-widest text-center mt-1">Years<br>Exp.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: Doctor Profile (Structured but Creative) -->
-    <section id="doctor" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto glass-panel rounded-[3rem] p-8 md:p-16 border border-white shadow-[0_20px_60px_rgba(0,0,0,0.05)] gs-fade-up">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                
-                <!-- Creative Image Frame -->
-                <div class="relative w-full max-w-md mx-auto interactive">
-                    <!-- Background accent shape -->
-                    <div class="absolute inset-0 bg-gradient-to-bl from-aurora-blue to-aurora-purple img-mask transform scale-110 opacity-40 float"></div>
-                    <!-- Doctor Image -->
-                    <img src="https://jjcoders.web.app/johan.png" alt="Dr Johan" class="relative z-10 w-full aspect-square object-cover object-top img-mask bg-white p-2 shadow-2xl">
-                    
-                    <!-- Experience Tag -->
-                    <div class="absolute -bottom-6 right-10 bg-dark text-white px-6 py-4 rounded-2xl z-20 shadow-xl transform rotate-3 flex flex-col items-center">
-                        <span class="text-3xl font-display font-bold text-aurora-cyan">20+</span>
-                        <span class="text-xs font-medium uppercase tracking-wider">Years Exp</span>
+    <!-- SECTION 2: Quick Stats Strip (Glassmorphic) -->
+    <section class="relative z-20 px-6 -mt-10 lg:-mt-16">
+        <div class="max-w-7xl mx-auto glass-panel rounded-[2rem] p-8 lg:p-10 flex flex-wrap justify-around items-center gap-8 text-center shadow-xl border-white border-2 gs-fade-up">
+            <div class="interactive">
+                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">99<span class="text-aurora-cyan">%</span></h3>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Satisfaction Rate</p>
+            </div>
+            <div class="hidden md:block w-px h-16 bg-slate-300/50"></div>
+            <div class="interactive">
+                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">50<span class="text-aurora-purple">+</span></h3>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Global Awards</p>
+            </div>
+            <div class="hidden md:block w-px h-16 bg-slate-300/50"></div>
+            <div class="interactive">
+                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">0<span class="text-aurora-pink">hrs</span></h3>
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Avg. Downtime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: The JJ Architecture (Interactive Process) -->
+    <section id="process" class="py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 gs-fade-up">
+                <p class="text-sm font-bold text-aurora-purple uppercase tracking-widest mb-4">Our Methodology</p>
+                <h2 class="text-4xl md:text-6xl font-display font-extrabold text-dark tracking-tight">
+                    The <span class="text-gradient">JJ Architecture.</span>
+                </h2>
+                <p class="text-lg text-slate-600 mt-6 max-w-2xl mx-auto font-medium">
+                    We don't just treat symptoms. We reconstruct your skin's health from the cellular level upwards using a proprietary 3-phase clinical approach.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group">
+                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-cyan/20 transition-colors absolute top-6 right-8">01</div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-cyan to-aurora-blue flex items-center justify-center text-white text-2xl mb-8 shadow-md">
+                        <i class="fa-solid fa-microscope"></i>
                     </div>
+                    <h3 class="text-2xl font-display font-bold text-dark mb-4">Deep Mapping</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium mb-6">
+                        Utilizing advanced dermal imaging to map your unique cellular structure, hydration levels, and underlying conditions before they surface.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-cyan mr-3"></i> DNA Analysis</li>
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-cyan mr-3"></i> Moisture Barrier Check</li>
+                    </ul>
                 </div>
 
-                <!-- Content (Structured) -->
-                <div>
-                    <div class="flex items-center gap-4 mb-6">
-                        <span class="h-px w-12 bg-aurora-purple"></span>
-                        <p class="text-sm font-bold text-aurora-purple uppercase tracking-widest">The Mastermind</p>
+                <!-- Step 2 -->
+                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group" style="animation-delay: 0.2s;">
+                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-purple/20 transition-colors absolute top-6 right-8">02</div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-purple to-aurora-pink flex items-center justify-center text-white text-2xl mb-8 shadow-md">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-6 leading-tight">
-                        Clinical expertise with an <span class="text-gradient">artist's vision.</span>
-                    </h2>
-                    <p class="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
-                        Dr. Johan is renowned for a subtle, undetectable approach to aesthetic enhancement. He combines two decades of medical precision with a profound appreciation for natural facial architecture and cellular health.
+                    <h3 class="text-2xl font-display font-bold text-dark mb-4">Clinical Restoration</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium mb-6">
+                        Curated medical-grade treatments designed to stimulate massive collagen production, repair damage, and renew your texture.
                     </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-aurora-cyan/20 flex items-center justify-center text-aurora-blue shrink-0 text-xl">
-                                <i class="fa-solid fa-stethoscope"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark text-lg">MD Dermatology</h4>
-                                <p class="text-sm text-slate-500">Board-certified clinical precision.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-aurora-pink/20 flex items-center justify-center text-pink-500 shrink-0 text-xl">
-                                <i class="fa-solid fa-heart-pulse"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark text-lg">Empathy First</h4>
-                                <p class="text-sm text-slate-500">Calm, attentive bedside manner.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-purple mr-3"></i> Energy Devices (Lasers)</li>
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-purple mr-3"></i> Bio-Stimulators</li>
+                    </ul>
+                </div>
 
-                    <a href="#booking" class="inline-flex items-center gap-3 font-bold text-dark text-lg hover:text-aurora-purple transition-colors interactive group">
-                        Consult with Dr. Johan 
-                        <span class="w-10 h-10 rounded-full border border-dark flex items-center justify-center group-hover:bg-aurora-purple group-hover:border-aurora-purple group-hover:text-white transition-all">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>
+                <!-- Step 3 -->
+                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group" style="animation-delay: 0.4s;">
+                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-peach/20 transition-colors absolute top-6 right-8">03</div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-peach to-aurora-pink flex items-center justify-center text-white text-2xl mb-8 shadow-md">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-dark mb-4">Cellular Protection</h3>
+                    <p class="text-slate-600 leading-relaxed font-medium mb-6">
+                        Future-proofing your skin with bespoke antioxidant shields and SPF architectures tailored precisely to your lifestyle and genetics.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-peach mr-3"></i> Custom Skincare Rx</li>
+                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-peach mr-3"></i> Routine Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Technology & Modalities (Rich Content List) -->
+    <section id="tech" class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto glass-dark rounded-[3rem] p-8 md:p-16 border border-white/20 shadow-2xl overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-aurora-purple/20 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+                <div class="lg:col-span-5 gs-fade-up">
+                    <p class="text-sm font-bold text-aurora-cyan uppercase tracking-widest mb-4">The Tech Suite</p>
+                    <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-6 leading-tight">
+                        Powered by <br> elite innovation.
+                    </h2>
+                    <p class="text-gray-400 mb-8 font-medium leading-relaxed">
+                        We invest in the top 1% of FDA-approved dermatological machinery globally. Our energy devices offer maximum efficacy with minimal to zero downtime.
+                    </p>
+                    <a href="#booking" class="bg-white text-dark px-8 py-4 rounded-full font-bold text-sm hover:bg-aurora-cyan hover:text-white transition-all inline-block interactive">
+                        Explore Treatments
                     </a>
                 </div>
+
+                <div class="lg:col-span-7 space-y-6 gs-fade-up">
+                    <!-- Tech Item 1 -->
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
+                        <div class="w-16 h-16 rounded-full bg-aurora-cyan/20 flex items-center justify-center text-aurora-cyan text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-display font-bold text-white mb-2">PicoSure Pro Lasers</h4>
+                            <p class="text-sm text-gray-400">The gold standard for removing stubborn pigmentation, melasma, and acne scarring in picoseconds without burning the skin.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tech Item 2 -->
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
+                        <div class="w-16 h-16 rounded-full bg-aurora-purple/20 flex items-center justify-center text-aurora-purple text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-wave-square"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-display font-bold text-white mb-2">Radiofrequency (RF) Microneedling</h4>
+                            <p class="text-sm text-gray-400">Deep tissue tightening. We deliver precise heat into the dermis to instantly contract and lift sagging skin profiles.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tech Item 3 -->
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
+                        <div class="w-16 h-16 rounded-full bg-aurora-pink/20 flex items-center justify-center text-aurora-pink text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-display font-bold text-white mb-2">3D VISIA Skin Analysis</h4>
+                            <p class="text-sm text-gray-400">Multispectral imaging to reveal damage on and below the skin surface, allowing us to track your progress mathematically.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: Visual & Colorful Services Grid -->
+    <!-- SECTION 5: Visual & Colorful Services Grid (Gallery & Modalities) -->
     <section id="services" class="py-24 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-fade-up gap-8">
@@ -360,50 +467,50 @@
                 </p>
             </div>
 
-            <!-- Immersive Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gs-fade-up">
+            <!-- Immersive Grid with Updated High-Res Images -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gs-fade-up">
                 
                 <!-- Service 1 (Image heavy) -->
-                <div class="service-card h-[28rem] group interactive shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1554050857-c84a8abdb5e5?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Clinical Care">
+                <div class="service-card h-[30rem] group interactive shadow-lg border border-white/50">
+                    <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Clinical Care">
                     <div class="overlay absolute inset-0"></div>
                     <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center mb-5 text-xl text-white group-hover:scale-110 transition-transform border-none">
+                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
                             <i class="fa-solid fa-droplet"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-bold mb-2">Clinical Dermatology</h3>
+                        <h3 class="text-3xl font-display font-bold mb-3">Clinical Dermatology</h3>
                         <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Medical rigor for acne, eczema, mole mapping, and chronic skin conditions.
+                            Medical rigor for acne, eczema, mole mapping, and chronic skin conditions utilizing evidence-based prescriptions.
                         </p>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="service-card h-[28rem] group interactive shadow-lg lg:-translate-y-8">
-                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Laser">
+                <div class="service-card h-[30rem] group interactive shadow-lg lg:-translate-y-12 border border-white/50">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Laser">
                     <div class="overlay absolute inset-0"></div>
                     <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center mb-5 text-xl text-white group-hover:scale-110 transition-transform border-none">
+                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-bold mb-2">Laser Precision</h3>
+                        <h3 class="text-3xl font-display font-bold mb-3">Laser Precision</h3>
                         <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Advanced arrays addressing pigmentation, resurfacing, and texture instantly.
+                            Advanced arrays addressing pigmentation, resurfacing, scarring, and texture instantly with zero downtime.
                         </p>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="service-card h-[28rem] group interactive shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71c9?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Sculpting">
+                <div class="service-card h-[30rem] group interactive shadow-lg border border-white/50">
+                    <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Sculpting">
                     <div class="overlay absolute inset-0"></div>
                     <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center mb-5 text-xl text-white group-hover:scale-110 transition-transform border-none">
+                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
                             <i class="fa-solid fa-face-smile-beam"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-bold mb-2">Aesthetic Sculpting</h3>
+                        <h3 class="text-3xl font-display font-bold mb-3">Aesthetic Sculpting</h3>
                         <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Subtle, natural enhancements using premium neuromodulators to restore balance.
+                            Subtle, natural enhancements using premium neuromodulators and fillers to restore youthful balance.
                         </p>
                     </div>
                 </div>
@@ -412,7 +519,7 @@
         </div>
     </section>
 
-    <!-- SECTION 4: Split Booking & Contact (Reference Style, Creative Skin) -->
+    <!-- SECTION 6: Split Booking & Contact -->
     <section id="booking" class="py-24 px-6 relative z-10">
         <div class="max-w-7xl mx-auto gs-fade-up">
             <div class="glass-panel rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border-white">
@@ -509,7 +616,7 @@
         </div>
     </section>
 
-    <!-- SECTION 5: Beautiful Reviews Grid -->
+    <!-- SECTION 7: Beautiful Reviews Grid -->
     <section id="testimonials" class="py-24 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 gs-fade-up">
@@ -642,7 +749,18 @@
 
         // Hero Parallax Elements
         gsap.to(".parallax-tag", {
-            y: -30,
+            y: -50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+        
+        gsap.to(".parallax-tag-reverse", {
+            y: 50,
             ease: "none",
             scrollTrigger: {
                 trigger: "#hero",
@@ -656,7 +774,7 @@
         const fadeUpElements = document.querySelectorAll('.gs-fade-up');
         fadeUpElements.forEach((el) => {
             gsap.fromTo(el, 
-                { y: 40, opacity: 0 },
+                { y: 50, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
