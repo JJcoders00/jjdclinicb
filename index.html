@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JJ D Clinic | Creative & Advanced Dermatology</title>
+    <title>JJ Clinic | Premium Dermatology & Aesthetics</title>
     
-    <!-- Premium Fonts: Outfit for creative headings, Nunito for clean body -->
+    <!-- Approachable, Premium Font: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,654 +20,392 @@
             theme: {
                 extend: {
                     colors: {
-                        aurora: {
-                            cyan: '#00f2fe',
-                            blue: '#4facfe',
-                            purple: '#a18cd1',
-                            pink: '#fbc2eb',
-                            peach: '#ff9a9e',
-                        },
-                        dark: '#0f172a'
+                        clinic: {
+                            primary: '#0D9488',    /* Trustworthy Teal */
+                            primaryHover: '#0F766E',
+                            secondary: '#FFE4E6',  /* Soft Peach/Skin tone */
+                            dark: '#1E293B',       /* Soft Black */
+                            light: '#F8FAFC',      /* Off White */
+                        }
                     },
                     fontFamily: {
-                        sans: ['"Nunito"', 'sans-serif'],
-                        display: ['"Outfit"', 'sans-serif'],
+                        sans: ['"Poppins"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                        'floating': '0 20px 50px -20px rgba(13, 148, 136, 0.2)',
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom Immersive Styles -->
+    <!-- Custom Styles -->
     <style>
         body {
-            font-family: '"Nunito"', sans-serif;
-            color: #0f172a;
+            font-family: 'Poppins', sans-serif;
+            color: #1E293B;
+            background-color: #F8FAFC;
             overflow-x: hidden;
-            background-color: #f8fafc;
-            cursor: none;
         }
 
-        /* 1. Dynamic Aurora Background */
-        .aurora-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.35), transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(251, 194, 235, 0.35), transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(161, 140, 209, 0.35), transparent 50%),
-                radial-gradient(circle at 80% 90%, rgba(255, 154, 158, 0.35), transparent 50%);
-            filter: blur(60px);
-            animation: auroraDrift 20s ease-in-out infinite alternate;
-        }
-
-        @keyframes auroraDrift {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(5deg); }
-            100% { transform: scale(1.05) rotate(-5deg); }
-        }
-
-        /* Subtle noise texture */
-        .noise-overlay {
+        /* Soft Watercolor Animated Background */
+        .watercolor-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
-            opacity: 0.25;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            pointer-events: none;
+            background: linear-gradient(120deg, #F8FAFC 0%, #F0FDF4 50%, #FFF1F2 100%);
         }
 
-        /* 2. Advanced Glassmorphism */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 40px -10px rgba(31, 38, 135, 0.1);
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: floatBlob 15s infinite alternate ease-in-out;
         }
-
-        .glass-dark {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* 3. Custom Cursor */
-        .cursor-ring {
-            position: fixed;
-            top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 2px solid rgba(15, 23, 42, 0.5);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10000;
-            transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
-        }
-
-        .cursor-dot {
-            position: fixed;
-            top: 0; left: 0;
-            width: 6px; height: 6px;
-            background: #0f172a;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10001;
-        }
-
-        .hover-active .cursor-ring {
-            width: 60px; height: 60px;
-            border-color: #00f2fe;
-            background-color: rgba(0, 242, 254, 0.1);
-            backdrop-filter: blur(2px);
-        }
-        .hover-active .cursor-dot { background: #00f2fe; }
-
-        /* 4. Shape Changing Animation (Applied to Hero Doctor) */
-        .organic-shape {
-            animation: morph 8s ease-in-out infinite alternate;
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            transition: all 1s ease-in-out;
-        }
-
-        .organic-shape-bg {
-            animation: morphReverse 10s ease-in-out infinite alternate;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-        }
-
-        @keyframes morph {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
-
-        @keyframes morphReverse {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            50% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
-            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-        }
-
-        /* Colorful Text Gradient */
-        .text-gradient {
-            background: linear-gradient(to right, #4facfe, #a18cd1, #fbc2eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: textShine 4s linear infinite;
-        }
-        @keyframes textShine { to { background-position: 200% center; } }
-
-        /* Floating elements */
-        .float { animation: float 6s ease-in-out infinite; }
-        .float-delayed { animation: float 6s ease-in-out infinite 3s; }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #CCFBF1; } /* Light Teal */
+        .blob-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: #FFE4E6; animation-delay: -5s; } /* Light Rose */
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
         }
 
-        /* Rich Service Cards */
+        /* Beautiful Curved Images */
+        .img-curve {
+            border-radius: 2rem 2rem 2rem 8rem;
+        }
+        
+        .img-curve-reverse {
+            border-radius: 2rem 8rem 2rem 2rem;
+        }
+
+        /* Service Card Hover */
         .service-card {
+            background: white;
+            border-radius: 1.5rem;
             overflow: hidden;
-            border-radius: 2rem;
-            position: relative;
-            transform: translateZ(0);
-        }
-        .service-card img {
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .service-card:hover img {
-            transform: scale(1.1);
-        }
-        .service-card .overlay {
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.4) 50%, rgba(15, 23, 42, 0) 100%);
             transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
         }
-        .service-card:hover .overlay {
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(161, 140, 209, 0.6) 100%);
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.1);
         }
 
-        /* Form Inputs */
-        .form-input {
+        .service-card img {
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Inputs */
+        .clinic-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid transparent;
+            background: #F1F5F9;
+            border: 1px solid transparent;
             padding: 1rem 1.25rem;
             border-radius: 1rem;
-            font-size: 1rem;
-            color: #0f172a;
+            font-size: 0.95rem;
+            color: #1E293B;
+            transition: all 0.3s ease;
             outline: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
-        .form-input:focus {
-            background: #ffffff;
-            border-color: #a18cd1;
-            box-shadow: 0 0 0 4px rgba(161, 140, 209, 0.2);
+
+        .clinic-input:focus {
+            background: white;
+            border-color: #0D9488;
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+        }
+
+        /* Floating Animation */
+        .float-anim {
+            animation: floatUpDown 4s ease-in-out infinite;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Ambient Background -->
-    <div class="aurora-bg"></div>
-    <div class="noise-overlay"></div>
+    <!-- Soft Background Visuals -->
+    <div class="watercolor-bg"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-ring" id="cursor-ring"></div>
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold text-clinic-dark tracking-tight flex items-center gap-2">
+                <div class="w-10 h-10 bg-clinic-primary rounded-xl flex items-center justify-center text-white text-lg shadow-md">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                JJ Clinic
+            </div>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
+                <a href="#hero" class="hover:text-clinic-primary transition-colors">Home</a>
+                <a href="#about" class="hover:text-clinic-primary transition-colors">Dr. Johan</a>
+                <a href="#services" class="hover:text-clinic-primary transition-colors">Treatments</a>
+                <a href="#reviews" class="hover:text-clinic-primary transition-colors">Reviews</a>
+            </div>
 
-    <!-- Floating Glass Navigation -->
-    <nav class="fixed w-full z-50 top-6 px-4 md:px-8 flex justify-center gs-nav">
-        <div class="glass-panel rounded-full px-8 py-4 flex items-center justify-between w-full max-w-7xl transition-all duration-300 hover:bg-white/80">
-            <div class="text-2xl font-display font-bold text-dark interactive flex items-center gap-2 tracking-tight">
-                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-aurora-cyan to-aurora-purple text-white flex items-center justify-center text-sm shadow-md">JJ</span>
-                Clinic.
-            </div>
-            <div class="hidden md:flex space-x-10 font-bold text-sm text-slate-700">
-                <a href="#hero" class="hover:text-aurora-purple transition-colors interactive">Vision</a>
-                <a href="#process" class="hover:text-aurora-purple transition-colors interactive">Our Process</a>
-                <a href="#tech" class="hover:text-aurora-purple transition-colors interactive">Technology</a>
-                <a href="#services" class="hover:text-aurora-purple transition-colors interactive">Treatments</a>
-                <a href="#testimonials" class="hover:text-aurora-purple transition-colors interactive">Stories</a>
-            </div>
-            <a href="#booking" class="bg-dark text-white px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 hover:shadow-[0_10px_20px_rgba(15,23,42,0.3)] transition-all interactive">
-                Reserve Date
+            <a href="#booking" class="bg-clinic-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-clinic-primaryHover hover:shadow-lg transition-all flex items-center gap-2">
+                Book Consult
             </a>
         </div>
     </nav>
 
-    <!-- SECTION 1: Creative Immersive Hero (Giant Shape-Changing Doctor) -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-12 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 w-full">
+    <!-- SECTION 1: Welcoming Hero -->
+    <section id="hero" class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
             
-            <!-- Text Content -->
-            <div class="lg:col-span-6 order-2 lg:order-1 gs-hero-text z-20">
-                <div class="inline-flex items-center glass-panel px-4 py-2 rounded-full text-dark font-bold text-xs tracking-widest uppercase mb-4 shadow-sm border-white/50">
-                    <span class="w-2 h-2 rounded-full bg-aurora-cyan mr-3 animate-pulse"></span>
-                    Dr. Johan Aesthetics
+            <!-- Hero Text -->
+            <div class="z-10 gs-reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 mb-6 text-sm font-semibold text-clinic-primary">
+                    <i class="fa-solid fa-star text-yellow-400"></i> Top Rated Clinic in the City
                 </div>
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] mb-5 text-dark tracking-tight">
-                    Where Skin <br>
-                    Meets <span class="text-gradient">Color.</span>
+                
+                <h1 class="text-5xl lg:text-6xl font-bold text-clinic-dark leading-[1.15] mb-6">
+                    Healthy, glowing skin <br> starts right <span class="text-clinic-primary">here.</span>
                 </h1>
-                <p class="text-base md:text-lg text-slate-700 mb-8 max-w-md leading-relaxed font-semibold">
-                    Led by Dr. Johan, we transcend traditional clinical care. Experience a symphony of medical precision, vibrant aesthetics, and deep cellular renewal.
-                </p>
-                <div class="flex flex-wrap gap-4 items-center">
-                    <a href="#booking" class="bg-gradient-to-r from-aurora-purple to-aurora-blue text-white px-8 py-3.5 rounded-full font-bold text-sm hover:shadow-[0_10px_30px_rgba(161,140,209,0.5)] hover:-translate-y-1 transition-all interactive flex items-center">
-                        Begin Transformation <i class="fa-solid fa-arrow-right ml-3"></i>
-                    </a>
-                    <div class="flex items-center gap-3 ml-2 mt-4 sm:mt-0">
-                        <div class="flex -space-x-3">
-                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Client">
-                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt="Client">
-                            <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Client">
-                        </div>
-                        <span class="text-xs font-bold text-dark">10k+ Happy Patients</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visual Creative Layout (Shape-Changing Doctor) -->
-            <div class="lg:col-span-6 order-1 lg:order-2 relative flex items-center justify-center gs-hero-img w-full">
                 
-                <!-- Centerpiece Doctor Image with Morphing Animation -->
-                <div class="relative w-full max-w-[360px] md:max-w-[420px] mx-auto interactive group flex items-center justify-center">
-                    <!-- Morphing glowing background -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-aurora-purple via-aurora-cyan to-aurora-pink organic-shape-bg opacity-50 blur-xl scale-110 group-hover:opacity-70 transition-opacity duration-500"></div>
-                    
-                    <!-- Doctor Image with Morphing border-radius -->
-                    <div class="relative z-10 w-full aspect-[4/5] organic-shape overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.2)] border-[6px] border-white/60 bg-gradient-to-b from-white/40 to-aurora-purple/10 backdrop-blur-md flex items-end">
-                        <img src="https://jjcoders.web.app/johan.png" 
-                             alt="Dr Johan" class="w-full h-full object-cover object-top mix-blend-multiply opacity-90 scale-105 group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    
-                    <!-- Floating Glass Tag -->
-                    <div class="absolute -left-4 md:-left-10 top-1/4 glass-panel rounded-2xl p-3 shadow-xl z-20 flex items-center gap-3 parallax-tag border-white/60">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-aurora-cyan to-aurora-blue flex justify-center items-center text-white text-lg">
-                            <i class="fa-solid fa-stethoscope"></i>
-                        </div>
-                        <div class="pr-3">
-                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Chief Director</p>
-                            <p class="text-sm font-bold text-dark">Dr. Johan</p>
-                        </div>
-                    </div>
-
-                    <!-- Floating Stat Tag -->
-                    <div class="absolute -right-4 bottom-1/4 glass-dark rounded-2xl p-3 shadow-xl z-20 flex flex-col items-center justify-center parallax-tag-reverse border-white/20 w-20 h-20">
-                        <p class="text-xl font-display font-extrabold text-aurora-cyan">20+</p>
-                        <p class="text-[9px] font-bold text-gray-300 uppercase tracking-widest text-center mt-1">Years<br>Exp.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2: Quick Stats Strip (Glassmorphic) -->
-    <section class="relative z-20 px-6 -mt-10 lg:-mt-16">
-        <div class="max-w-7xl mx-auto glass-panel rounded-[2rem] p-8 lg:p-10 flex flex-wrap justify-around items-center gap-8 text-center shadow-xl border-white border-2 gs-fade-up">
-            <div class="interactive">
-                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">99<span class="text-aurora-cyan">%</span></h3>
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Satisfaction Rate</p>
-            </div>
-            <div class="hidden md:block w-px h-16 bg-slate-300/50"></div>
-            <div class="interactive">
-                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">50<span class="text-aurora-purple">+</span></h3>
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Global Awards</p>
-            </div>
-            <div class="hidden md:block w-px h-16 bg-slate-300/50"></div>
-            <div class="interactive">
-                <h3 class="text-4xl md:text-5xl font-display font-extrabold text-dark mb-2">0<span class="text-aurora-pink">hrs</span></h3>
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Avg. Downtime</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: The JJ Architecture (Interactive Process) -->
-    <section id="process" class="py-32 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 gs-fade-up">
-                <p class="text-sm font-bold text-aurora-purple uppercase tracking-widest mb-4">Our Methodology</p>
-                <h2 class="text-4xl md:text-6xl font-display font-extrabold text-dark tracking-tight">
-                    The <span class="text-gradient">JJ Architecture.</span>
-                </h2>
-                <p class="text-lg text-slate-600 mt-6 max-w-2xl mx-auto font-semibold">
-                    We don't just treat symptoms. We reconstruct your skin's health from the cellular level upwards using a proprietary 3-phase clinical approach.
+                <p class="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
+                    Experience world-class dermatology tailored just for you. From treating complex skin conditions to advanced aesthetic laser therapies, we are dedicated to your confidence.
                 </p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group">
-                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-cyan/20 transition-colors absolute top-6 right-8">01</div>
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-cyan to-aurora-blue flex items-center justify-center text-white text-2xl mb-8 shadow-md">
-                        <i class="fa-solid fa-microscope"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-extrabold text-dark mb-4">Deep Mapping</h3>
-                    <p class="text-slate-600 leading-relaxed font-semibold mb-6">
-                        Utilizing advanced dermal imaging to map your unique cellular structure, hydration levels, and underlying conditions before they surface.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-cyan mr-3"></i> DNA Analysis</li>
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-cyan mr-3"></i> Moisture Barrier Check</li>
-                    </ul>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group" style="animation-delay: 0.2s;">
-                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-purple/20 transition-colors absolute top-6 right-8">02</div>
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-purple to-aurora-pink flex items-center justify-center text-white text-2xl mb-8 shadow-md">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-extrabold text-dark mb-4">Clinical Restoration</h3>
-                    <p class="text-slate-600 leading-relaxed font-semibold mb-6">
-                        Curated medical-grade treatments designed to stimulate massive collagen production, repair damage, and renew your texture.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-purple mr-3"></i> Energy Devices (Lasers)</li>
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-purple mr-3"></i> Bio-Stimulators</li>
-                    </ul>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="glass-panel p-10 rounded-[2.5rem] shadow-lg border border-white gs-fade-up interactive hover:-translate-y-4 transition-all duration-500 group" style="animation-delay: 0.4s;">
-                    <div class="text-6xl font-display font-extrabold text-slate-200 group-hover:text-aurora-peach/20 transition-colors absolute top-6 right-8">03</div>
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-aurora-peach to-aurora-pink flex items-center justify-center text-white text-2xl mb-8 shadow-md">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-2xl font-display font-extrabold text-dark mb-4">Cellular Protection</h3>
-                    <p class="text-slate-600 leading-relaxed font-semibold mb-6">
-                        Future-proofing your skin with bespoke antioxidant shields and SPF architectures tailored precisely to your lifestyle and genetics.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-peach mr-3"></i> Custom Skincare Rx</li>
-                        <li class="flex items-center text-sm font-bold text-dark"><i class="fa-solid fa-check text-aurora-peach mr-3"></i> Routine Maintenance</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: Technology & Modalities (Rich Content List) -->
-    <section id="tech" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto glass-dark rounded-[3rem] p-8 md:p-16 border border-white/20 shadow-2xl overflow-hidden relative">
-            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-aurora-purple/20 rounded-full blur-[100px] pointer-events-none"></div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
-                <div class="lg:col-span-5 gs-fade-up">
-                    <p class="text-sm font-bold text-aurora-cyan uppercase tracking-widest mb-4">The Tech Suite</p>
-                    <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-6 leading-tight">
-                        Powered by <br> elite innovation.
-                    </h2>
-                    <p class="text-gray-400 mb-8 font-semibold leading-relaxed">
-                        We invest in the top 1% of FDA-approved dermatological machinery globally. Our energy devices offer maximum efficacy with minimal to zero downtime.
-                    </p>
-                    <a href="#booking" class="bg-white text-dark px-8 py-4 rounded-full font-bold text-sm hover:bg-aurora-cyan hover:text-white transition-all inline-block interactive">
-                        Explore Treatments
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#booking" class="bg-clinic-primary text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-clinic-primaryHover shadow-floating transition-all flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Book Appointment
+                    </a>
+                    <a href="#services" class="bg-white border-2 border-slate-200 text-clinic-dark px-8 py-4 rounded-full font-semibold text-base hover:border-clinic-primary transition-all text-center">
+                        Explore Services
                     </a>
                 </div>
 
-                <div class="lg:col-span-7 space-y-6 gs-fade-up">
-                    <!-- Tech Item 1 -->
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
-                        <div class="w-16 h-16 rounded-full bg-aurora-cyan/20 flex items-center justify-center text-aurora-cyan text-2xl shrink-0 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-display font-extrabold text-white mb-2">PicoSure Pro Lasers</h4>
-                            <p class="text-sm text-gray-400 font-medium">The gold standard for removing stubborn pigmentation, melasma, and acne scarring in picoseconds without burning the skin.</p>
-                        </div>
+                <div class="mt-10 flex items-center gap-4">
+                    <div class="flex -space-x-3">
+                        <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt="Client">
+                        <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt="Client">
+                        <img class="w-10 h-10 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Client">
                     </div>
+                    <div>
+                        <p class="text-sm font-bold text-clinic-dark">10,000+ Happy Patients</p>
+                        <div class="text-yellow-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual (Beautiful & Approachable) -->
+            <div class="relative w-full h-[500px] lg:h-[600px] flex items-center justify-center gs-reveal z-10">
+                <div class="relative w-full max-w-md mx-auto">
+                    <!-- Decorative Background element -->
+                    <div class="absolute inset-0 bg-clinic-secondary rounded-full transform translate-x-6 translate-y-6"></div>
                     
-                    <!-- Tech Item 2 -->
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
-                        <div class="w-16 h-16 rounded-full bg-aurora-purple/20 flex items-center justify-center text-aurora-purple text-2xl shrink-0 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-wave-square"></i>
+                    <!-- Main Image -->
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=800&auto=format&fit=crop" 
+                         alt="Glowing Skin" class="relative z-10 w-full h-auto aspect-[4/5] object-cover img-curve shadow-2xl border-8 border-white">
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -left-6 bottom-12 bg-white p-4 rounded-2xl shadow-floating z-20 flex items-center gap-4 float-anim border border-gray-100">
+                        <div class="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center text-clinic-primary text-xl">
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <div>
-                            <h4 class="text-xl font-display font-extrabold text-white mb-2">Radiofrequency (RF) Microneedling</h4>
-                            <p class="text-sm text-gray-400 font-medium">Deep tissue tightening. We deliver precise heat into the dermis to instantly contract and lift sagging skin profiles.</p>
-                        </div>
-                    </div>
-
-                    <!-- Tech Item 3 -->
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-6 interactive hover:bg-white/20 transition-colors group">
-                        <div class="w-16 h-16 rounded-full bg-aurora-pink/20 flex items-center justify-center text-aurora-pink text-2xl shrink-0 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-camera"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-display font-extrabold text-white mb-2">3D VISIA Skin Analysis</h4>
-                            <p class="text-sm text-gray-400 font-medium">Multispectral imaging to reveal damage on and below the skin surface, allowing us to track your progress mathematically.</p>
+                            <p class="text-xs font-bold text-slate-500 uppercase">Certified Care</p>
+                            <p class="text-sm font-bold text-clinic-dark">FDA Approved</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 5: Visual & Colorful Services Grid (Gallery & Modalities) -->
-    <section id="services" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-fade-up gap-8">
-                <div class="max-w-2xl">
-                    <p class="text-sm font-bold text-aurora-blue uppercase tracking-widest mb-4">Our Canvas</p>
-                    <h2 class="text-5xl md:text-6xl font-display font-extrabold text-dark tracking-tight leading-tight">
-                        Transformative <br> <span class="text-gradient">Treatments.</span>
-                    </h2>
-                </div>
-                <p class="text-lg text-slate-600 font-semibold max-w-sm md:text-right">
-                    Comprehensive skin, laser, and aesthetic care elevated by cutting-edge technology.
-                </p>
-            </div>
-
-            <!-- Immersive Grid with Updated High-Res Images -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gs-fade-up">
-                
-                <!-- Service 1 (Image heavy) -->
-                <div class="service-card h-[30rem] group interactive shadow-lg border border-white/50">
-                    <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Clinical Care">
-                    <div class="overlay absolute inset-0"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
-                            <i class="fa-solid fa-droplet"></i>
-                        </div>
-                        <h3 class="text-3xl font-display font-extrabold mb-3">Clinical Dermatology</h3>
-                        <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Medical rigor for acne, eczema, mole mapping, and chronic skin conditions utilizing evidence-based prescriptions.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="service-card h-[30rem] group interactive shadow-lg lg:-translate-y-12 border border-white/50">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Laser">
-                    <div class="overlay absolute inset-0"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <h3 class="text-3xl font-display font-extrabold mb-3">Laser Precision</h3>
-                        <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Advanced arrays addressing pigmentation, resurfacing, scarring, and texture instantly with zero downtime.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="service-card h-[30rem] group interactive shadow-lg border border-white/50">
-                    <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Sculpting">
-                    <div class="overlay absolute inset-0"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white z-10">
-                        <div class="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center mb-6 text-2xl text-white group-hover:scale-110 transition-transform border-none">
-                            <i class="fa-solid fa-face-smile-beam"></i>
-                        </div>
-                        <h3 class="text-3xl font-display font-extrabold mb-3">Aesthetic Sculpting</h3>
-                        <p class="text-sm text-gray-300 font-medium opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-500 leading-relaxed">
-                            Subtle, natural enhancements using premium neuromodulators and fillers to restore youthful balance.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6: Split Booking & Contact -->
-    <section id="booking" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto gs-fade-up">
-            <div class="glass-panel rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col lg:flex-row border-white">
-                
-                <!-- Left Info Panel (Dark/Colorful) -->
-                <div class="glass-dark p-10 md:p-16 lg:w-[45%] flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-aurora-purple/40 to-aurora-cyan/10 z-0"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="inline-block bg-white/10 px-4 py-2 rounded-full text-white font-bold text-xs uppercase tracking-widest mb-6 backdrop-blur-md">
-                            Priority Access
-                        </div>
-                        <h2 class="text-4xl md:text-5xl font-display font-extrabold text-white mb-6 leading-tight">
-                            Your journey begins <br> via WhatsApp.
-                        </h2>
-                        <p class="text-gray-300 mb-12 font-semibold text-lg">
-                            Message directly, share your skin concerns privately, and secure the fastest path to consultation.
-                        </p>
-                    </div>
-
-                    <div class="space-y-4 relative z-10">
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 interactive hover:bg-white/20 transition-colors">
-                            <div class="flex items-center gap-4 mb-2">
-                                <div class="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center text-white text-xl">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                </div>
-                                <h4 class="font-bold text-white text-lg">Direct WhatsApp</h4>
-                            </div>
-                            <p class="text-sm text-gray-300 ml-14">Fastest response time. Share images securely.</p>
-                        </div>
-
-                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 interactive hover:bg-white/20 transition-colors">
-                            <div class="flex items-center gap-4 mb-2">
-                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white text-xl">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <h4 class="font-bold text-white text-lg">Premium Clinic</h4>
-                            </div>
-                            <p class="text-sm text-gray-300 ml-14">Trivandrum City Center. Easy parking available.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Form Panel (Clean Glass) -->
-                <div class="p-10 md:p-16 lg:w-[55%] bg-white/60 backdrop-blur-3xl relative">
-                    <div class="text-center mb-8">
-                        <h3 class="text-3xl font-display font-extrabold text-dark mb-2">Request Consultation</h3>
-                        <p class="text-slate-600 font-semibold text-sm">Fill details to auto-format a WhatsApp request.</p>
-                    </div>
-
-                    <form id="bookingForm" class="space-y-6 relative z-10">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="interactive">
-                                <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">Full Name</label>
-                                <input type="text" id="name" required class="form-input font-medium" placeholder="e.g. Sarah Jenkins">
-                            </div>
-                            <div class="interactive">
-                                <label for="phone" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">Phone Number</label>
-                                <input type="tel" id="phone" required class="form-input font-medium" placeholder="e.g. +91 861 079 6218">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="interactive">
-                                <label for="service" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">Area of Interest</label>
-                                <select id="service" required class="form-input cursor-pointer text-slate-500 font-medium appearance-none">
-                                    <option value="" disabled selected>Select concern...</option>
-                                    <option value="Clinical Dermatology">Clinical Dermatology</option>
-                                    <option value="Laser Treatments">Laser Treatments</option>
-                                    <option value="Aesthetic Sculpting">Aesthetic Sculpting</option>
-                                    <option value="General Consultation">General Consultation</option>
-                                </select>
-                            </div>
-                            <div class="interactive">
-                                <label for="date" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">Preferred Date</label>
-                                <input type="date" id="date" required class="form-input cursor-pointer font-medium text-slate-500">
-                            </div>
-                        </div>
-
-                        <div class="interactive">
-                            <label for="message" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 ml-1">Your Story</label>
-                            <textarea id="message" rows="3" class="form-input resize-none font-medium" placeholder="Briefly describe your skin goals or concerns..."></textarea>
-                        </div>
-
-                        <div class="pt-4">
-                            <button type="submit" class="w-full bg-gradient-to-r from-aurora-cyan via-aurora-blue to-aurora-purple text-white text-lg font-bold py-5 rounded-2xl hover:shadow-[0_10px_30px_rgba(0,242,254,0.4)] hover:-translate-y-1 transition-all interactive flex justify-center items-center gap-3">
-                                <span>Connect via WhatsApp</span>
-                                <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 7: Beautiful Reviews Grid -->
-    <section id="testimonials" class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 gs-fade-up">
-                <p class="text-sm font-bold text-aurora-purple uppercase tracking-widest mb-4">Patient Stories</p>
-                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-dark tracking-tight">
-                    A reputation built on <span class="text-gradient">results.</span>
-                </h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 gs-fade-up">
+        </div>
+    </section>
+
+    <!-- SECTION 2: Doctor Profile -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto bg-white rounded-[3rem] p-8 md:p-16 shadow-soft border border-gray-100 gs-reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- Doctor Image Masked -->
+                <div class="order-2 lg:order-1 flex justify-center relative">
+                    <div class="absolute inset-0 bg-teal-50 rounded-full transform -translate-x-4 -translate-y-4"></div>
+                    <img src="https://jjcoders.web.app/johan.png" alt="Dr Johan" class="relative z-10 w-full max-w-sm aspect-square object-cover object-top img-curve-reverse border-8 border-white shadow-xl bg-slate-100">
+                    
+                    <div class="absolute -right-4 top-10 bg-white px-6 py-3 rounded-2xl shadow-floating z-20 float-anim border border-gray-100 flex flex-col items-center">
+                        <span class="text-2xl font-bold text-clinic-primary">20+</span>
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest text-center">Years<br>Experience</span>
+                    </div>
+                </div>
+
+                <!-- Doctor Content -->
+                <div class="order-1 lg:order-2">
+                    <h3 class="text-clinic-primary font-semibold tracking-wider text-sm uppercase mb-3">Meet The Expert</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold text-clinic-dark mb-6 leading-tight">
+                        Dr. Johan <span class="text-2xl text-slate-500 block mt-2">MD. Dermatology</span>
+                    </h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        With over two decades of experience, Dr. Johan is dedicated to providing compassionate, effective, and state-of-the-art dermatological care. He believes in treating the patient, not just the symptom, ensuring you feel comfortable and confident every step of the way.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-clinic-primary shadow-sm"><i class="fa-solid fa-user-doctor"></i></div>
+                            <div>
+                                <h4 class="font-bold text-clinic-dark text-sm">Patient-Centric Approach</h4>
+                                <p class="text-xs text-slate-500">We listen to your concerns thoroughly.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-clinic-primary shadow-sm"><i class="fa-solid fa-microscope"></i></div>
+                            <div>
+                                <h4 class="font-bold text-clinic-dark text-sm">Advanced Diagnostics</h4>
+                                <p class="text-xs text-slate-500">Using the latest technology for accurate treatment.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#booking" class="inline-flex items-center gap-2 text-clinic-primary font-bold hover:text-clinic-primaryHover transition-colors group">
+                        Schedule a Consultation <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Visual & Colorful Services Grid -->
+    <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16 gs-reveal">
+            <h3 class="text-clinic-primary font-semibold tracking-wider text-sm uppercase mb-3">Our Expertise</h3>
+            <h2 class="text-4xl md:text-5xl font-bold text-clinic-dark mb-4">Comprehensive Treatments</h2>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">From medical dermatology to advanced aesthetic procedures, we offer everything your skin needs to thrive.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gs-reveal">
+            
+            <!-- Service 1 -->
+            <div class="service-card flex flex-col h-full cursor-pointer group">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Clinical Dermatology">
+                    <div class="absolute inset-0 bg-clinic-dark opacity-10 group-hover:opacity-0 transition-opacity"></div>
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                    <div class="w-12 h-12 rounded-full bg-teal-50 text-clinic-primary flex items-center justify-center text-xl mb-4 -mt-14 relative z-10 border-4 border-white">
+                        <i class="fa-solid fa-stethoscope"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-clinic-dark mb-3">Clinical Dermatology</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Expert diagnosis and treatment for acne, eczema, psoriasis, rosacea, and comprehensive skin cancer screenings.
+                    </p>
+                    <a href="#booking" class="text-clinic-primary font-bold text-sm flex items-center gap-1 group-hover:text-clinic-primaryHover">
+                        Book Now <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card flex flex-col h-full cursor-pointer group">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Laser Treatments">
+                    <div class="absolute inset-0 bg-clinic-dark opacity-10 group-hover:opacity-0 transition-opacity"></div>
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                    <div class="w-12 h-12 rounded-full bg-teal-50 text-clinic-primary flex items-center justify-center text-xl mb-4 -mt-14 relative z-10 border-4 border-white">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-clinic-dark mb-3">Laser Therapeutics</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                        State-of-the-art laser technology for pigmentation removal, acne scar resurfacing, and permanent hair reduction.
+                    </p>
+                    <a href="#booking" class="text-clinic-primary font-bold text-sm flex items-center gap-1 group-hover:text-clinic-primaryHover">
+                        Book Now <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card flex flex-col h-full cursor-pointer group">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover" alt="Aesthetic Sculpting">
+                    <div class="absolute inset-0 bg-clinic-dark opacity-10 group-hover:opacity-0 transition-opacity"></div>
+                </div>
+                <div class="p-8 flex flex-col flex-grow">
+                    <div class="w-12 h-12 rounded-full bg-teal-50 text-clinic-primary flex items-center justify-center text-xl mb-4 -mt-14 relative z-10 border-4 border-white">
+                        <i class="fa-solid fa-face-smile-beam"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-clinic-dark mb-3">Aesthetic Enhancements</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Subtle, natural-looking anti-aging treatments including premium neuromodulators and dermal fillers.
+                    </p>
+                    <a href="#booking" class="text-clinic-primary font-bold text-sm flex items-center gap-1 group-hover:text-clinic-primaryHover">
+                        Book Now <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: Simple Beautiful Reviews -->
+    <section id="reviews" class="py-24 px-4 sm:px-6 lg:px-8 bg-white border-y border-gray-100 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 gs-reveal">
+                <h3 class="text-clinic-primary font-semibold tracking-wider text-sm uppercase mb-3">Patient Stories</h3>
+                <h2 class="text-4xl md:text-5xl font-bold text-clinic-dark mb-4">Loved by the Community</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 gs-reveal">
                 <!-- Review 1 -->
-                <div class="glass-panel p-8 rounded-3xl shadow-lg border border-white interactive hover:-translate-y-2 transition-transform duration-300">
-                    <div class="text-[#fbc2eb] text-xl mb-6 flex gap-1">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-soft transition-shadow">
+                    <div class="text-yellow-400 text-lg mb-4 flex gap-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-slate-700 font-semibold text-lg mb-8 italic leading-relaxed">"Dr. Johan completely changed my skin texture. The laser precision treatment was painless, and I haven't worn foundation in months!"</p>
-                    <div class="flex items-center gap-4 border-t border-slate-200/50 pt-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-aurora-pink to-aurora-peach rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">S</div>
+                    <p class="text-slate-700 font-medium text-base mb-8 leading-relaxed">"Very friendly environment and exceptional care. The laser precision treatment was painless, and I am so happy with the results!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-clinic-secondary rounded-full flex items-center justify-center text-clinic-primary font-bold text-lg">S</div>
                         <div>
-                            <h4 class="font-bold text-dark">Sarah J.</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Laser Resurfacing</p>
+                            <h4 class="font-bold text-clinic-dark">Sarah J.</h4>
+                            <p class="text-xs text-slate-500 font-medium">Laser Patient</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Review 2 -->
-                <div class="glass-panel p-8 rounded-3xl shadow-lg border border-white interactive hover:-translate-y-2 transition-transform duration-300 md:translate-y-8">
-                    <div class="text-[#a18cd1] text-xl mb-6 flex gap-1">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-soft transition-shadow">
+                    <div class="text-yellow-400 text-lg mb-4 flex gap-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-slate-700 font-semibold text-lg mb-8 italic leading-relaxed">"I wanted a very subtle lift without looking 'done'. The aesthetic sculpting here is true art. Highly recommend the clinic."</p>
-                    <div class="flex items-center gap-4 border-t border-slate-200/50 pt-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-aurora-purple to-aurora-cyan rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">E</div>
+                    <p class="text-slate-700 font-medium text-base mb-8 leading-relaxed">"Dr. Johan is a down to earth person who hears all your concerns patiently. Prescribes only necessary treatments. Highly recommend."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">R</div>
                         <div>
-                            <h4 class="font-bold text-dark">Elena R.</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Bio-Sculpting</p>
+                            <h4 class="font-bold text-clinic-dark">Rahul M.</h4>
+                            <p class="text-xs text-slate-500 font-medium">Clinical Patient</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Review 3 -->
-                <div class="glass-panel p-8 rounded-3xl shadow-lg border border-white interactive hover:-translate-y-2 transition-transform duration-300">
-                    <div class="text-[#00f2fe] text-xl mb-6 flex gap-1">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-soft transition-shadow">
+                    <div class="text-yellow-400 text-lg mb-4 flex gap-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <p class="text-slate-700 font-semibold text-lg mb-8 italic leading-relaxed">"The facility feels like a futuristic spa. From the moment you walk in, it's 5-star service. My cystic acne is completely gone."</p>
-                    <div class="flex items-center gap-4 border-t border-slate-200/50 pt-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-aurora-cyan to-aurora-blue rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">M</div>
+                    <p class="text-slate-700 font-medium text-base mb-8 leading-relaxed">"I wanted a very subtle lift without looking 'done'. The aesthetic work here is true art. The clinic feels so luxurious yet comfortable."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-lg">E</div>
                         <div>
-                            <h4 class="font-bold text-dark">Michael T.</h4>
-                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Clinical Care</p>
+                            <h4 class="font-bold text-clinic-dark">Elena R.</h4>
+                            <p class="text-xs text-slate-500 font-medium">Aesthetics Patient</p>
                         </div>
                     </div>
                 </div>
@@ -675,31 +413,135 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="glass-dark border-t border-white/10 py-14 px-6 relative z-10 mt-12 rounded-t-[3rem]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-            <div class="max-w-sm">
-                <div class="text-2xl font-display font-extrabold text-white tracking-tight flex items-center gap-2 mb-6">
-                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-aurora-cyan to-aurora-purple text-white flex items-center justify-center text-sm">JJ</span>
-                    Clinic.
+    <!-- SECTION 5: WhatsApp Booking (Friendly & Clean) -->
+    <section id="booking" class="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-6xl mx-auto bg-white rounded-[3rem] shadow-soft overflow-hidden flex flex-col lg:flex-row border border-gray-100 gs-reveal">
+            
+            <!-- Left Info Panel -->
+            <div class="bg-clinic-primary p-10 md:p-16 lg:w-[45%] flex flex-col justify-between text-white relative overflow-hidden">
+                <!-- Decorative Circle -->
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-white opacity-10 rounded-full"></div>
+                <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-clinic-dark opacity-10 rounded-full"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Ready to start <br> your journey?
+                    </h2>
+                    <p class="text-teal-50 mb-12 text-lg">
+                        Booking is simple. Fill out the form, and we will connect with you instantly via WhatsApp to confirm your slot.
+                    </p>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6 font-medium">Elevating dermatology into an art form. High-end clinical care focused on comfort, clarity, and breathtaking results.</p>
-                <div class="flex gap-4 text-xl">
-                    <a href="#" class="text-gray-400 hover:text-aurora-pink transition-colors interactive"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-aurora-cyan transition-colors interactive"><i class="fa-brands fa-tiktok"></i></a>
+
+                <div class="space-y-6 relative z-10">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl backdrop-blur-sm">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-teal-100 uppercase tracking-wider">Call Us directly</p>
+                            <h4 class="font-bold text-lg">+91 861 079 6218</h4>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl backdrop-blur-sm">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-teal-100 uppercase tracking-wider">Visit Clinic</p>
+                            <h4 class="font-bold text-lg">Trivandrum City Center</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="p-10 md:p-16 lg:w-[55%] bg-white">
+                <div class="mb-8">
+                    <h3 class="text-3xl font-bold text-clinic-dark mb-2">Request an Appointment</h3>
+                    <p class="text-slate-500 text-sm">We'll message you on WhatsApp to confirm.</p>
+                </div>
+
+                <form id="bookingForm" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-1">Full Name</label>
+                            <input type="text" id="name" required class="clinic-input" placeholder="e.g. Sarah Jenkins">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-1">Phone Number</label>
+                            <input type="tel" id="phone" required class="clinic-input" placeholder="e.g. +91 861 079 6218">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-1">What do you need help with?</label>
+                        <select id="service" required class="clinic-input cursor-pointer appearance-none text-slate-500">
+                            <option value="" disabled selected>Select concern...</option>
+                            <option value="Skin Issue / Consultation">Skin Issue / Consultation</option>
+                            <option value="Laser Treatment">Laser Treatment</option>
+                            <option value="Anti-Aging / Aesthetics">Anti-Aging / Aesthetics</option>
+                            <option value="Hair Loss / Other">Hair Loss / Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 ml-1">Any specific notes? (Optional)</label>
+                        <textarea id="message" rows="3" class="clinic-input resize-none" placeholder="Briefly describe your skin goals or concerns..."></textarea>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full bg-[#25D366] text-white text-lg font-bold py-4 rounded-xl hover:bg-[#20BA56] shadow-md hover:shadow-lg transition-all flex justify-center items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Send to WhatsApp
+                        </button>
+                        <p class="text-center text-xs text-slate-400 mt-4">100% secure and private.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-clinic-dark pt-16 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-12 border-b border-white/10 pb-12">
+            
+            <div class="max-w-sm">
+                <div class="flex items-center gap-2 text-2xl font-bold text-white mb-4">
+                    <div class="w-8 h-8 bg-clinic-primary rounded-lg flex items-center justify-center text-white text-sm">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    JJ Clinic
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">Providing premium dermatological care with compassion, expertise, and the latest clinical technology.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-clinic-primary transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-clinic-primary transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
             </div>
             
-            <div class="flex flex-col gap-4">
-                <h4 class="font-bold text-white text-sm uppercase tracking-widest mb-2">Connect</h4>
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors interactive flex items-center gap-3"><i class="fa-solid fa-phone w-4 text-aurora-cyan"></i> +91 861 079 6218</a>
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors interactive flex items-center gap-3"><i class="fa-brands fa-whatsapp w-4 text-[#25D366]"></i> Fast Booking</a>
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors interactive flex items-center gap-3"><i class="fa-solid fa-location-dot w-4 text-aurora-pink"></i> Trivandrum, India</a>
+            <div class="flex flex-col sm:flex-row gap-12 md:gap-24">
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4 uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#hero" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">About Doctor</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Treatments</a></li>
+                        <li><a href="#reviews" class="hover:text-white transition-colors">Reviews</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-bold mb-4 uppercase tracking-wider">Contact</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-clinic-primary"></i> +91 861 079 6218</li>
+                        <li class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-[#25D366]"></i> WhatsApp Booking</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-clinic-primary"></i> Trivandrum Center</li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-14 pt-8 border-t border-white/10 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-bold uppercase tracking-wider">
-            <p>&copy; 2026 JJ Coders. All rights reserved.</p>
-            <p>Designed for the Extraordinary.</p>
+        
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+            <p>© 2026 JJ Clinic & JJ Coders. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">Designed for Premium Healthcare</p>
         </div>
     </footer>
 
@@ -708,78 +550,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // Immersive Custom Cursor
-        const cursorRing = document.getElementById('cursor-ring');
-        const cursorDot = document.getElementById('cursor-dot');
-        const interactives = document.querySelectorAll('.interactive, a, button, input, select, textarea');
-
-        // Center GSAP defaults
-        gsap.set(cursorRing, { xPercent: -50, yPercent: -50 });
-        gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
-
-        window.addEventListener('mousemove', (e) => {
-            // Instant dot
-            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0 });
-            // Smooth ring
-            gsap.to(cursorRing, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.15,
-                ease: "power2.out"
-            });
-        });
-
-        // Hover states
-        interactives.forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
-        });
-
-        // Form Select/Date color fix
-        const formSelects = document.querySelectorAll('select, input[type="date"]');
-        formSelects.forEach(el => {
-            el.addEventListener('change', function() {
-                this.classList.remove('text-slate-500');
-                this.classList.add('text-[#0f172a]');
-            });
+        // Select input color fix
+        const selectInput = document.getElementById('service');
+        selectInput.addEventListener('change', function() {
+            this.classList.remove('text-slate-500');
+            this.classList.add('text-clinic-dark');
         });
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero Parallax Elements
-        gsap.to(".parallax-tag", {
-            y: -50,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-        
-        gsap.to(".parallax-tag-reverse", {
-            y: 50,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
-        // Standard Fade Ups
-        const fadeUpElements = document.querySelectorAll('.gs-fade-up');
-        fadeUpElements.forEach((el) => {
+        // Soft Reveal Animation
+        const revealElements = document.querySelectorAll('.gs-reveal');
+        revealElements.forEach((el) => {
             gsap.fromTo(el, 
-                { y: 50, opacity: 0 },
+                { y: 30, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
                     duration: 1,
-                    ease: "power3.out",
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: el,
                         start: "top 85%",
@@ -789,63 +579,57 @@
             );
         });
 
-        // Hero entrance timeline
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        tl.fromTo(".gs-nav", { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.2 })
-          .fromTo(".gs-hero-text", { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, "-=0.6")
-          .fromTo(".gs-hero-img", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 }, "-=0.8");
+        // WhatsApp Booking Logic + Admin Ledger Save
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
 
-        // WhatsApp Booking Logic + Local Storage Save
-document.getElementById('bookingForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const service = document.getElementById('service').value;
-    const date = document.getElementById('date').value;
-    const message = document.getElementById('message').value;
+            // --- SAVE TO LOCAL STORAGE FOR ADMIN.HTML ---
+            const newBooking = {
+                id: Date.now(),
+                name: name,
+                phone: phone,
+                service: service,
+                preferredDate: "Not Specified", // This form version has no date input
+                message: message,
+                submittedAt: new Date().toLocaleString()
+            };
 
-    // --- NEW: SAVE DATA FOR ADMIN.HTML ---
-    const newBooking = {
-        id: Date.now(),
-        name: name,
-        phone: phone,
-        service: service,
-        preferredDate: date,
-        message: message,
-        submittedAt: new Date().toLocaleString()
-    };
+            const existingBookings = JSON.parse(localStorage.getItem('jj_clinic_bookings')) || [];
+            existingBookings.unshift(newBooking);
+            localStorage.setItem('jj_clinic_bookings', JSON.stringify(existingBookings));
+            // --------------------------------------------
 
-    // Retrieve old leads and add the new one to the top
-    const existingBookings = JSON.parse(localStorage.getItem('jj_clinic_bookings')) || [];
-    existingBookings.unshift(newBooking);
-    localStorage.setItem('jj_clinic_bookings', JSON.stringify(existingBookings));
-    // --------------------------------------
+            const targetNumber = "918610796218";
+            
+            const waText = `✨ *New Clinic Appointment Request* ✨%0A%0A` +
+                           `👤 *Name:* ${name}%0A` +
+                           `📱 *Phone:* ${phone}%0A` +
+                           `🩺 *Concern:* ${service}%0A` +
+                           `💬 *Notes:* ${message ? message : 'None'}`;
 
-    const targetNumber = "918610796218";
-    
-    const waText = `✨ *JJ Clinic - VIP Consultation* ✨%0A%0A` +
-                   `👤 *Name:* ${name}%0A` +
-                   `📱 *Phone:* ${phone}%0A` +
-                   `💎 *Focus:* ${service}%0A` +
-                   `📅 *Date:* ${date}%0A` +
-                   `💬 *Story:* ${message ? message : 'N/A'}`;
-
-    window.open(`https://wa.me/${targetNumber}?text=${waText}`, '_blank');
-    
-    const btn = this.querySelector('button[type="submit"]');
-    const ogContent = btn.innerHTML;
-    
-    // UI Feedback: Show it's saving
-    btn.innerHTML = '<span>Saving to Ledger...</span><i class="fa-solid fa-spinner fa-spin ml-3"></i>';
-    
-    setTimeout(() => {
-        this.reset();
-        formSelects.forEach(el => el.classList.add('text-slate-500'));
-        btn.innerHTML = '<span>Saved & Sent!</span><i class="fa-solid fa-check ml-3"></i>';
-        setTimeout(() => btn.innerHTML = ogContent, 3000);
-    }, 1500);
-});
+            window.open(`https://wa.me/${targetNumber}?text=${waText}`, '_blank');
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const ogContent = btn.innerHTML;
+            
+            // UI Feedback
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-2xl"></i> Saving & Opening...';
+            
+            setTimeout(() => {
+                this.reset();
+                selectInput.classList.add('text-slate-500');
+                btn.innerHTML = '<i class="fa-solid fa-check text-2xl"></i> Recorded Successfully!';
+                
+                setTimeout(() => {
+                    btn.innerHTML = ogContent;
+                }, 3000);
+            }, 1000);
+        });
     </script>
 </body>
 </html>
