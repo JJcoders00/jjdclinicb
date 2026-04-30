@@ -45,11 +45,19 @@
 
     <!-- Custom Styles -->
     <style>
+        /* Mobile Horizontal Overflow Fixes */
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             color: #0F172A;
             background-color: #F8FAFC;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         /* Flawless SPA Routing Styles */
@@ -68,7 +76,7 @@
         /* Soft Watercolor & Pattern Animated Background */
         .bg-pattern {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             background-color: #F8FAFC;
             background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
@@ -78,7 +86,7 @@
 
         .watercolor-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: linear-gradient(120deg, rgba(248,250,252,0.8) 0%, rgba(240,253,244,0.6) 50%, rgba(255,241,242,0.6) 100%);
         }
@@ -92,9 +100,9 @@
             border-radius: 50%;
         }
         
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #99F6E4; }
-        .blob-2 { bottom: 10%; right: -10%; width: 40vw; height: 40vw; background: #FECDD3; animation-delay: -5s; }
-        .blob-3 { top: 40%; left: 30%; width: 35vw; height: 35vw; background: #E0E7FF; animation-delay: -2s; }
+        .blob-1 { top: -10%; left: -10%; width: 50%; height: 50vw; background: #99F6E4; }
+        .blob-2 { bottom: 10%; right: -10%; width: 40%; height: 40vw; background: #FECDD3; animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 30%; width: 35%; height: 35vw; background: #E0E7FF; animation-delay: -2s; }
 
         @keyframes floatBlob {
             0% { transform: translate(0, 0) scale(1); }
@@ -222,6 +230,71 @@
         /* Select input fix for floating labels */
         select.peer:invalid { color: transparent; }
         select.peer option { color: #0F172A; }
+
+        /* --- Mobile Menu Styles & Animations --- */
+        body.menu-open { overflow: hidden; }
+        
+        body.menu-open #mobile-menu-overlay { 
+            opacity: 1; 
+            visibility: visible;
+        }
+        
+        body.menu-open #mobile-menu-btn {
+            background-color: #0F172A;
+            color: white;
+            border-color: #0F172A;
+        }
+        body.menu-open #mobile-menu-btn span {
+            background-color: white;
+        }
+        body.menu-open #mobile-menu-btn span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        body.menu-open #mobile-menu-btn span:nth-child(2) { opacity: 0; }
+        body.menu-open #mobile-menu-btn span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        #mobile-menu-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        /* Staggered Mobile Menu Links */
+        .mobile-nav-link {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body.menu-open .mobile-nav-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body.menu-open .mobile-nav-link:nth-child(1) { transition-delay: 0.1s; }
+        body.menu-open .mobile-nav-link:nth-child(2) { transition-delay: 0.15s; }
+        body.menu-open .mobile-nav-link:nth-child(3) { transition-delay: 0.2s; }
+        body.menu-open .mobile-nav-link:nth-child(4) { transition-delay: 0.25s; }
+        body.menu-open .mobile-nav-link:nth-child(5) { transition-delay: 0.3s; }
+        
+        .mobile-nav-divider {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        body.menu-open .mobile-nav-divider {
+            opacity: 1;
+            transition-delay: 0.35s;
+        }
+
+        .mobile-nav-btn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body.menu-open .mobile-nav-btn {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -234,15 +307,16 @@
     <div class="blob blob-3"></div>
 
     <!-- Global Navigation -->
-    <nav class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-300 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <a href="#home" class="text-2xl font-bold text-clinic-dark tracking-tight flex items-center gap-3">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between relative z-50">
+            <a href="#home" class="text-2xl font-bold text-clinic-dark tracking-tight flex items-center gap-3 shrink-0">
                 <div class="w-10 h-10 bg-gradient-to-br from-clinic-primary to-clinic-primaryHover rounded-xl flex items-center justify-center text-white text-lg shadow-floating">
                     <i class="fa-solid fa-leaf"></i>
                 </div>
                 JJ Clinic
             </a>
             
+            <!-- Desktop Links -->
             <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
                 <a href="#home" class="nav-link hover:text-clinic-primary transition-colors">Home</a>
                 <a href="#about" class="nav-link hover:text-clinic-primary transition-colors">About Us</a>
@@ -251,9 +325,36 @@
                 <a href="#contact" class="nav-link hover:text-clinic-primary transition-colors">Contact</a>
             </div>
 
-            <a href="#contact" class="bg-clinic-dark text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-clinic-primary hover:shadow-floating transition-all flex items-center gap-2">
-                Book Consult <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
+            <!-- Desktop & Mobile Actions -->
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="#contact" class="hidden md:flex bg-clinic-dark text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-clinic-primary hover:shadow-floating transition-all items-center gap-2">
+                    Book Consult <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+                
+                <!-- Mobile Hamburger Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 bg-white border border-slate-200 rounded-full text-clinic-dark z-[60] transition-all duration-300 focus:outline-none shadow-sm">
+                    <span class="w-4 h-[2px] bg-current rounded-full transition-all duration-300 mb-1"></span>
+                    <span class="w-4 h-[2px] bg-current rounded-full transition-all duration-300 mb-1"></span>
+                    <span class="w-4 h-[2px] bg-current rounded-full transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Fullscreen Overlay -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-40 flex flex-col justify-start items-center pt-32 pb-12 h-[100dvh] overflow-y-auto">
+            <div class="flex flex-col items-center space-y-6 text-2xl font-bold text-clinic-dark w-full px-6 min-h-max">
+                <a href="#home" class="mobile-nav-link hover:text-clinic-primary transition-colors">Home</a>
+                <a href="#about" class="mobile-nav-link hover:text-clinic-primary transition-colors">About Us</a>
+                <a href="#treatments" class="mobile-nav-link hover:text-clinic-primary transition-colors">Treatments</a>
+                <a href="#gallery" class="mobile-nav-link hover:text-clinic-primary transition-colors">Gallery</a>
+                <a href="#contact" class="mobile-nav-link hover:text-clinic-primary transition-colors">Contact</a>
+                
+                <div class="mobile-nav-divider w-full max-w-xs h-px bg-slate-200 my-4"></div>
+                
+                <a href="#contact" class="mobile-nav-btn w-full max-w-xs bg-clinic-primary text-white px-8 py-4 rounded-full text-lg shadow-floating flex items-center justify-center gap-3 transition-transform active:scale-95">
+                    Book Consult <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -262,7 +363,7 @@
          ========================================== -->
     <main id="home" class="page-view active">
         <!-- Welcoming Hero -->
-        <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex items-center">
+        <section class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[90vh] flex items-center overflow-x-hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center w-full">
                 
                 <div class="z-10 gs-reveal">
@@ -276,8 +377,8 @@
                         Experience world-class dermatology tailored just for you. From clinical conditions to advanced aesthetic laser therapies, we build your confidence.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="bg-clinic-primary text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-clinic-primaryHover shadow-floating transition-all flex items-center justify-center gap-3">
-                            <i class="fa-brands fa-whatsapp text-xl"></i> Schedule Visit
+                        <a href="#contact" class="bg-clinic-primary text-white px-8 py-4 rounded-full font-semibold text-base hover:bg-clinic-primaryHover shadow-floating transition-all flex items-center justify-center gap-3 group">
+                            <i class="fa-brands fa-whatsapp text-xl group-hover:scale-110 transition-transform"></i> Schedule Visit
                         </a>
                         <a href="#treatments" class="bg-white border border-slate-200 text-clinic-dark px-8 py-4 rounded-full font-semibold text-base hover:border-clinic-primary hover:text-clinic-primary transition-all text-center shadow-sm">
                             View Treatments
@@ -354,7 +455,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=600&auto=format&fit=crop" alt="Clinical Dermatology">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold">View Details</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -367,7 +468,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop" alt="Laser Treatments">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold">View Details</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -380,7 +481,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=600&auto=format&fit=crop" alt="Aesthetics">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold">View Details</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -388,6 +489,11 @@
                         <p class="text-slate-600 text-sm leading-relaxed flex-grow">Subtle, natural-looking anti-aging treatments and premium dermal sculpting.</p>
                     </div>
                 </div>
+            </div>
+            <div class="mt-8 text-center md:hidden">
+                <a href="#treatments" class="inline-flex items-center gap-2 text-clinic-primary font-bold hover:text-clinic-primaryHover transition-colors">
+                    View All Treatments <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
         </section>
     </main>
@@ -397,12 +503,10 @@
          ========================================== -->
     <main id="about" class="page-view pt-28 pb-12">
         
-        <!-- NEW IMMERSIVE HEADER -->
+        <!-- IMMERSIVE HEADER -->
         <section class="relative mt-4 mb-16 mx-4 sm:mx-6 lg:mx-8 max-w-7xl lg:mx-auto rounded-[3rem] overflow-hidden shadow-soft min-h-[400px] md:min-h-[500px] flex items-center gs-reveal">
-            <!-- Animated Background Image -->
             <div class="absolute inset-0 w-full h-full">
                 <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1600&auto=format&fit=crop" alt="Clinic Interior" class="w-full h-full object-cover animate-slow-zoom">
-                <!-- Rich Dark Gradient Overlay -->
                 <div class="absolute inset-0 bg-gradient-to-r from-clinic-dark/95 via-clinic-dark/70 to-transparent"></div>
             </div>
             
@@ -418,7 +522,7 @@
         </section>
 
         <!-- Doctor Profile -->
-        <section class="py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <section class="py-16 px-4 sm:px-6 lg:px-8 relative z-10 overflow-x-hidden">
             <div class="max-w-7xl mx-auto glass-card rounded-[3rem] p-8 md:p-16 shadow-soft gs-reveal border border-white">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     <div class="order-2 lg:order-1 flex justify-center relative">
@@ -465,7 +569,7 @@
         </section>
 
         <!-- Clinic Experience -->
-        <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto gs-reveal">
+        <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto gs-reveal overflow-x-hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1 relative h-[450px]">
                     <div class="absolute inset-0 bg-clinic-secondary/40 rounded-[3rem] transform -translate-x-6 translate-y-6"></div>
@@ -493,7 +597,7 @@
          ========================================== -->
     <main id="treatments" class="page-view pt-28 pb-12">
         
-        <!-- NEW IMMERSIVE HEADER -->
+        <!-- IMMERSIVE HEADER -->
         <section class="relative mt-4 mb-16 mx-4 sm:mx-6 lg:mx-8 max-w-7xl lg:mx-auto rounded-[3rem] overflow-hidden shadow-soft min-h-[400px] md:min-h-[500px] flex items-center gs-reveal">
             <div class="absolute inset-0 w-full h-full">
                 <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1600&auto=format&fit=crop" alt="Skin Care Textures" class="w-full h-full object-cover animate-slow-zoom">
@@ -546,7 +650,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=600&auto=format&fit=crop" alt="Clinical">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -559,7 +663,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop" alt="Laser">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -572,7 +676,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=600&auto=format&fit=crop" alt="Aesthetics">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -585,7 +689,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=600&auto=format&fit=crop" alt="Chemical Peels">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -598,7 +702,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=600&auto=format&fit=crop" alt="Hair Loss">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -611,7 +715,7 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=600&auto=format&fit=crop" alt="Microneedling">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold">Book Consultation</span>
+                            <span class="bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg">Book Consultation</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
@@ -628,7 +732,7 @@
          ========================================== -->
     <main id="gallery" class="page-view pt-28 pb-12">
         
-        <!-- NEW IMMERSIVE HEADER -->
+        <!-- IMMERSIVE HEADER -->
         <section class="relative mt-4 mb-16 mx-4 sm:mx-6 lg:mx-8 max-w-7xl lg:mx-auto rounded-[3rem] overflow-hidden shadow-soft min-h-[400px] md:min-h-[500px] flex items-center gs-reveal">
             <div class="absolute inset-0 w-full h-full">
                 <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1600&auto=format&fit=crop" alt="Laser Room" class="w-full h-full object-cover animate-slow-zoom">
@@ -668,8 +772,8 @@
                     <div class="gallery-caption"><h4 class="font-bold text-xl">Facial Sculpting</h4></div>
                 </div>
                 <div class="gallery-item border-4 border-white">
-                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=600&auto=format&fit=crop" alt="Hair Results">
-                    <div class="gallery-caption"><h4 class="font-bold text-xl">Healthy Transformations</h4></div>
+                    <img src="https://images.unsplash.com/photo-1598440947619-2ce59f138852?q=80&w=600&auto=format&fit=crop" alt="Microneedling">
+                    <div class="gallery-caption"><h4 class="font-bold text-xl">RF Tech Devices</h4></div>
                 </div>
             </div>
         </section>
@@ -680,7 +784,7 @@
          ========================================== -->
     <main id="contact" class="page-view pt-28 pb-12">
         
-        <!-- NEW IMMERSIVE HEADER -->
+        <!-- IMMERSIVE HEADER -->
         <section class="relative mt-4 mb-16 mx-4 sm:mx-6 lg:mx-8 max-w-7xl lg:mx-auto rounded-[3rem] overflow-hidden shadow-soft min-h-[400px] md:min-h-[500px] flex items-center gs-reveal">
             <div class="absolute inset-0 w-full h-full">
                 <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1600&auto=format&fit=crop" alt="Map Location" class="w-full h-full object-cover animate-slow-zoom">
@@ -955,6 +1059,33 @@
         window.addEventListener('hashchange', handleRoute);
         window.addEventListener('DOMContentLoaded', handleRoute);
 
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleMobileMenu() {
+            document.body.classList.toggle('menu-open');
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Select input color fix
+        const selectInput = document.getElementById('service');
+        if(selectInput) {
+            selectInput.addEventListener('change', function() {
+                this.classList.remove('text-slate-500');
+                this.classList.add('text-clinic-dark');
+            });
+        }
+
         // GSAP Animations Function
         gsap.registerPlugin(ScrollTrigger);
 
@@ -1026,6 +1157,7 @@
             
             setTimeout(() => {
                 this.reset();
+                if(selectInput) selectInput.classList.add('text-slate-500');
                 btn.innerHTML = '<i class="fa-solid fa-check text-2xl"></i> Recorded Successfully!';
                 
                 setTimeout(() => {
