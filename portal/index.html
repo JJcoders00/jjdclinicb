@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal | JJ Clinic</title>
+    
+    <!-- Approachable, Premium Font: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clinic: {
+                            primary: '#0D9488',    /* Trustworthy Teal */
+                            primaryHover: '#0F766E',
+                            secondary: '#FFE4E6',  /* Soft Peach/Skin tone */
+                            accent: '#FDE047',     /* Soft Gold */
+                            dark: '#0F172A',       /* Deep Navy */
+                            light: '#F8FAFC',      /* Off White */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+                        'floating': '0 20px 40px -15px rgba(13, 148, 136, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            background-color: #F8FAFC;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        /* Abstract Background Elements */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background-image: radial-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #99F6E4; }
+        .blob-2 { bottom: 10%; right: -10%; width: 40vw; height: 40vw; background: #FECDD3; }
+
+        .view-section {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative flex flex-col">
+
+    <!-- Soft Background Visuals -->
+    <div class="bg-pattern"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- Simple Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <a href="../index.html" class="text-2xl font-bold text-clinic-dark tracking-tight flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-clinic-primary to-clinic-primaryHover rounded-xl flex items-center justify-center text-white text-lg shadow-floating">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                JJ Clinic
+            </a>
+            
+            <a href="../index.html" class="text-sm font-semibold text-slate-500 hover:text-clinic-primary transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Back to Website
+            </a>
+        </div>
+    </nav>
+
+    <!-- VIEWS CONTAINER -->
+    <div class="flex-grow pt-24 pb-12 flex flex-col">
+
+        <!-- LOGIN VIEW -->
+        <main id="login-view" class="view-section hidden flex-grow flex-col items-center justify-center">
+            <div class="max-w-md w-full mx-auto px-4">
+                <div class="glass-card p-10 rounded-[2rem] shadow-soft border border-white relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-clinic-primary/10 rounded-full blur-2xl"></div>
+                    <div class="text-center mb-8 relative z-10">
+                        <div class="w-16 h-16 bg-clinic-dark rounded-2xl flex items-center justify-center text-white text-2xl shadow-floating mx-auto mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-clinic-dark">Secure Portal Access</h2>
+                        <p class="text-slate-500 text-sm mt-2">Authorized Patients Only</p>
+                    </div>
+                    
+                    <form id="portalLoginForm" class="space-y-5 relative z-10">
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 group-focus-within:text-clinic-primary">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <input type="email" id="loginEmail" class="peer w-full bg-white border border-slate-200 text-clinic-dark rounded-xl focus:ring-2 focus:ring-clinic-primary/20 focus:border-clinic-primary block pl-11 pr-4 py-3.5 transition-all outline-none font-medium text-sm" placeholder="Patient Email" required />
+                        </div>
+                        
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 group-focus-within:text-clinic-primary">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <input type="password" id="loginPassword" class="peer w-full bg-white border border-slate-200 text-clinic-dark rounded-xl focus:ring-2 focus:ring-clinic-primary/20 focus:border-clinic-primary block pl-11 pr-4 py-3.5 transition-all outline-none font-medium text-sm" placeholder="Password" required />
+                        </div>
+
+                        <div id="loginErrorMsg" class="text-red-500 text-xs font-semibold hidden text-center bg-red-50 p-3 rounded-lg border border-red-100">Invalid credentials. Please try again.</div>
+                        
+                        <button type="submit" id="loginSubmitBtn" class="w-full bg-clinic-dark text-white font-bold py-4 rounded-xl hover:bg-clinic-primary shadow-floating transition-all flex justify-center items-center gap-2 mt-2">
+                            <span>Access Records</span> <i class="fa-solid fa-arrow-right-to-bracket text-sm"></i>
+                        </button>
+                    </form>
+                    
+                    <p class="text-center text-xs text-slate-400 mt-6 relative z-10"><i class="fa-solid fa-circle-info text-slate-300 mr-1"></i> Patient accounts are provisioned exclusively by clinic administration. Registration is not permitted.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- DASHBOARD VIEW -->
+        <main id="dashboard-view" class="view-section hidden flex-grow">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold text-clinic-dark">Medical Records</h2>
+                        <p class="text-slate-500 mt-1">Welcome back, <span id="patientEmailDisplay" class="font-semibold text-clinic-primary">Patient</span></p>
+                    </div>
+                    <button id="logoutBtn" class="bg-white text-red-600 border border-red-100 px-6 py-3 rounded-full font-semibold text-sm hover:bg-red-50 hover:border-red-200 shadow-sm transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-power-off"></i> Secure Logout
+                    </button>
+                </div>
+
+                <div class="glass-card rounded-[2rem] shadow-soft border border-white overflow-hidden">
+                    <div class="p-6 bg-clinic-dark text-white flex justify-between items-center">
+                        <h3 class="font-bold text-lg"><i class="fa-solid fa-file-medical mr-2 text-clinic-accent"></i> Lab Reports</h3>
+                        <div class="text-xs bg-white/20 px-3 py-1 rounded-full border border-white/10"><i class="fa-solid fa-lock mr-1"></i> Encrypted</div>
+                    </div>
+                    <div class="p-0 overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[600px]">
+                            <thead>
+                                <tr class="bg-slate-50/80 border-b border-slate-100 text-xs uppercase tracking-wider text-slate-500">
+                                    <th class="p-5 font-bold rounded-tl-xl">Date</th>
+                                    <th class="p-5 font-bold">Report Name</th>
+                                    <th class="p-5 font-bold">Prescribing Doctor</th>
+                                    <th class="p-5 font-bold text-right rounded-tr-xl">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="labReportsTableBody" class="divide-y divide-slate-100 bg-white/50">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center text-sm text-slate-400">
+                    <p><i class="fa-solid fa-shield-check mr-1 text-clinic-primary"></i> Your medical data is strictly confidential and encrypted at rest.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase Integration Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB8yrl5GldsjZ36eutz8FlGcMO0PxurDQ8",
+            authDomain: "jjdclinicdemo1-jjcoders-abcd.firebaseapp.com",
+            projectId: "jjdclinicdemo1-jjcoders-abcd",
+            storageBucket: "jjdclinicdemo1-jjcoders-abcd.firebasestorage.app",
+            messagingSenderId: "485304161125",
+            appId: "1:485304161125:web:4c1b84f237b83ac327878c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginView = document.getElementById('login-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const emailDisplay = document.getElementById('patientEmailDisplay');
+
+        // View Management
+        function showView(viewId) {
+            loginView.classList.add('hidden');
+            loginView.classList.remove('flex');
+            loginView.style.opacity = '0';
+            
+            dashboardView.classList.add('hidden');
+            dashboardView.classList.remove('block');
+            dashboardView.style.opacity = '0';
+            
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            
+            if(viewId === 'login-view') {
+                target.classList.add('flex');
+            } else {
+                target.classList.add('block');
+            }
+            
+            // Allow CSS transitions
+            setTimeout(() => {
+                target.style.opacity = '1';
+            }, 50);
+        }
+
+        // Auth Listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                emailDisplay.innerText = user.email;
+                showView('dashboard-view');
+                fetchLabReports(user.uid);
+            } else {
+                showView('login-view');
+            }
+        });
+
+        // Login Logic
+        document.getElementById('portalLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+            const password = document.getElementById('loginPassword').value;
+            const submitBtn = document.getElementById('loginSubmitBtn');
+            const errorMsg = document.getElementById('loginErrorMsg');
+            const ogHtml = submitBtn.innerHTML;
+
+            errorMsg.classList.add('hidden');
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+
+            try {
+                // Admin redirect fallback
+                if(email === 'adminjohan' || email === 'admin@jjclinic.com') {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Welcome Admin';
+                    setTimeout(() => {
+                        window.location.href = 'admin.html';
+                    }, 500);
+                    return;
+                }
+
+                // Normal Patient Login
+                await signInWithEmailAndPassword(auth, email, password);
+                // The onAuthStateChanged listener handles the view switch
+                submitBtn.innerHTML = ogHtml;
+                document.getElementById('portalLoginForm').reset();
+            } catch (error) {
+                errorMsg.classList.remove('hidden');
+                submitBtn.innerHTML = ogHtml;
+                console.error("Login Error:", error);
+            }
+        });
+
+        // Logout Logic
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            signOut(auth);
+        });
+
+        // Fetch Lab Reports
+        async function fetchLabReports(uid) {
+            const tableBody = document.getElementById('labReportsTableBody');
+            tableBody.innerHTML = '<tr><td colspan="4" class="text-center p-12 text-slate-400"><i class="fa-solid fa-spinner fa-spin text-3xl mb-4 text-clinic-primary block"></i> Securely fetching your records...</td></tr>';
+            
+            try {
+                const q = query(collection(db, "lab_reports"), where("patient_uid", "==", uid));
+                const querySnapshot = await getDocs(q);
+                
+                if (querySnapshot.empty) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="text-center p-16 text-slate-400"><div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"><i class="fa-solid fa-folder-open"></i></div><h3 class="font-bold text-clinic-dark mb-1">No Records Found</h3><p class="text-sm">Your lab reports will appear here once uploaded by the clinic.</p></td></tr>';
+                    return;
+                }
+
+                let html = '';
+                let reports = [];
+                const now = Date.now();
+                querySnapshot.forEach((doc) => { 
+                    const r = doc.data();
+                    if(!r.expires_at || r.expires_at >= now) {
+                        reports.push(r); 
+                    }
+                });
+                reports.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                reports.forEach((data) => {
+                    const isText = data.type === 'text';
+                    const icon = isText ? 'fa-file-lines' : 'fa-file-pdf text-red-400';
+                    
+                    const actionHtml = isText
+                        ? `<button onclick="alert('Consultation Notes:\\n\\n' + decodeURIComponent('${encodeURIComponent(data.text_content || '')}'))" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-clinic-dark rounded-lg text-sm font-bold shadow-sm hover:border-clinic-primary hover:text-clinic-primary transition-all hover:shadow-md"><i class="fa-solid fa-eye"></i> View</button>`
+                        : `<a href="${data.pdf_url}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-clinic-dark rounded-lg text-sm font-bold shadow-sm hover:border-clinic-primary hover:text-clinic-primary transition-all hover:shadow-md"><i class="fa-solid fa-download"></i> PDF</a>`;
+
+                    html += `
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-5 text-sm font-semibold text-clinic-dark">${data.date}</td>
+                            <td class="p-5 font-bold text-clinic-primary"><i class="fa-solid ${icon} mr-3 opacity-70"></i>${data.report_name}</td>
+                            <td class="p-5 text-sm font-medium text-slate-600"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-teal-50 text-clinic-primary flex items-center justify-center text-[10px]"><i class="fa-solid fa-user-doctor"></i></div> ${data.prescribing_doctor}</div></td>
+                            <td class="p-5 text-right">
+                                ${actionHtml}
+                            </td>
+                        </tr>
+                    `;
+                });
+                tableBody.innerHTML = html;
+            } catch (error) {
+                console.error("Error fetching documents: ", error);
+                tableBody.innerHTML = '<tr><td colspan="4" class="text-center p-12 text-red-500 font-bold"><i class="fa-solid fa-triangle-exclamation mr-2"></i> Error fetching records. Please try again.</td></tr>';
+            }
+        }
+    </script>
+</body>
+</html>
