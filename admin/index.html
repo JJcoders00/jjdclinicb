@@ -130,6 +130,9 @@
                 <button onclick="switchTab('labreports')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
                     <i class="fa-solid fa-file-medical w-5"></i> Lab Reports
                 </button>
+                <button onclick="switchTab('cms')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-pen-to-square w-5"></i> Website CMS
+                </button>
             </nav>
 
             <div class="p-6 border-t border-white/10">
@@ -320,6 +323,21 @@
                 </div>
             </div>
 
+            <!-- CMS Tab -->
+            <div id="tab-cms" class="tab-content h-full">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h1 class="text-3xl font-display font-extrabold tracking-tight">Visual <span class="text-gradient">Editor.</span></h1>
+                        <p class="text-slate-400 text-sm mt-1">Click on any text with a dashed border to edit it, then click Save Changes.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-[2rem] border border-white/10 shadow-2xl w-full h-[calc(100vh-140px)] overflow-hidden bg-white relative">
+                    <!-- Overlay while loading iframe could be added here, but iframe works fine -->
+                    <iframe src="../index.html?editMode=true" class="w-full h-full border-0 absolute inset-0"></iframe>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -384,7 +402,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-        import { getFirestore, collection, query, getDocs, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getFirestore, collection, query, getDocs, addDoc, onSnapshot, deleteDoc, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
         const firebaseConfig = {
@@ -839,6 +857,30 @@
                 document.getElementById('statReports').innerText = rep.size;
             } catch(e) { console.log(e); }
         }
+
+        // Listen for messages from Visual Editor iframe
+        window.addEventListener('message', async (event) => {
+            if (event.data.type === 'SAVE_CMS') {
+                try {
+                    const pageId = event.data.pageId || "homepage";
+                    await setDoc(doc(db, "cms_content", pageId), event.data.payload, { merge: true });
+                    event.source.postMessage({ type: 'CMS_SAVE_SUCCESS' }, '*');
+                } catch(e) {
+                    console.error("Parent Save Error:", e);
+                    event.source.postMessage({ type: 'CMS_SAVE_ERROR' }, '*');
+                }
+            } else if (event.data.type === 'RESET_CMS') {
+                try {
+                    const pageId = event.data.pageId || "homepage";
+                    await deleteDoc(doc(db, "cms_content", pageId));
+                    // Reload iframe
+                    const iframe = document.querySelector('#tab-cms iframe');
+                    if(iframe) iframe.src = iframe.src;
+                } catch(e) {
+                    console.error("Parent Reset Error:", e);
+                }
+            }
+        });
 
     </script>
 </body>

@@ -501,6 +501,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../cms-editor.js"></script>
 
     <script>
         // Mobile Menu Logic
@@ -565,7 +566,7 @@
     <!-- Firebase Integration Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB8yrl5GldsjZ36eutz8FlGcMO0PxurDQ8",
@@ -578,6 +579,11 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // Init Visual CMS Editor
+        if(window.initCms) {
+            window.initCms(db, getDoc, doc);
+        }
 
         // ------------------
         // BOOKING FORM LOGIC

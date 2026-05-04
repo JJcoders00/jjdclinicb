@@ -370,13 +370,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12 items-center w-full">
                 
                 <div class="z-10 gs-reveal">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-teal-100 mb-6 text-sm font-semibold text-clinic-primary shadow-sm">
+                    <div data-cms-id="heroBadge" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-teal-100 mb-6 text-sm font-semibold text-clinic-primary shadow-sm">
                         <i class="fa-solid fa-award text-clinic-accent"></i> Premier Dermatology Clinic
                     </div>
-                    <h1 class="text-5xl lg:text-7xl font-extrabold text-clinic-dark leading-[1.1] mb-6 tracking-tight">
+                    <h1 id="cms-hero-title" data-cms-id="heroTitle" class="text-5xl lg:text-7xl font-extrabold text-clinic-dark leading-[1.1] mb-6 tracking-tight">
                         Mastering the art of <br> <span class="text-clinic-primary">healthy skin.</span>
                     </h1>
-                    <p class="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
+                    <p id="cms-hero-subtitle" data-cms-id="heroSubtitle" class="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
                         Experience world-class dermatology tailored just for you. From clinical conditions to advanced aesthetic laser therapies, we build your confidence.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
@@ -426,18 +426,18 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass-card p-8 rounded-3xl shadow-sm hover:shadow-soft transition-all border border-white">
                     <div class="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-clinic-primary text-2xl mb-5"><i class="fa-solid fa-user-doctor"></i></div>
-                    <h3 class="text-lg font-bold text-clinic-dark mb-2">Expert Dermatologists</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Board-certified specialists tailoring routines specifically to your unique skin biology.</p>
+                    <h3 data-cms-id="feat1Title" class="text-lg font-bold text-clinic-dark mb-2">Expert Dermatologists</h3>
+                    <p data-cms-id="feat1Desc" class="text-slate-600 text-sm leading-relaxed">Board-certified specialists tailoring routines specifically to your unique skin biology.</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl shadow-sm hover:shadow-soft transition-all border border-white">
                     <div class="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-clinic-primary text-2xl mb-5"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h3 class="text-lg font-bold text-clinic-dark mb-2">Advanced Technology</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Utilizing the latest FDA-approved laser and aesthetic machinery for extreme precision.</p>
+                    <h3 data-cms-id="feat2Title" class="text-lg font-bold text-clinic-dark mb-2">Advanced Technology</h3>
+                    <p data-cms-id="feat2Desc" class="text-slate-600 text-sm leading-relaxed">Utilizing the latest FDA-approved laser and aesthetic machinery for extreme precision.</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl shadow-sm hover:shadow-soft transition-all border border-white">
                     <div class="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-clinic-primary text-2xl mb-5"><i class="fa-solid fa-spa"></i></div>
-                    <h3 class="text-lg font-bold text-clinic-dark mb-2">Luxury Environment</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">A calming, highly premium clinic experience designed for your complete comfort and privacy.</p>
+                    <h3 data-cms-id="feat3Title" class="text-lg font-bold text-clinic-dark mb-2">Luxury Environment</h3>
+                    <p data-cms-id="feat3Desc" class="text-slate-600 text-sm leading-relaxed">A calming, highly premium clinic experience designed for your complete comfort and privacy.</p>
                 </div>
             </div>
         </section>
@@ -446,8 +446,8 @@
         <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
             <div class="flex justify-between items-end mb-12 gs-reveal">
                 <div>
-                    <h3 class="text-clinic-primary font-semibold tracking-wider text-sm uppercase mb-2">Our Expertise</h3>
-                    <h2 class="text-4xl font-bold text-clinic-dark">Featured Treatments</h2>
+                    <h3 data-cms-id="treatmentsSubtitle" class="text-clinic-primary font-semibold tracking-wider text-sm uppercase mb-2">Our Expertise</h3>
+                    <h2 data-cms-id="treatmentsTitle" class="text-4xl font-bold text-clinic-dark">Featured Treatments</h2>
                 </div>
                 <a href="#treatments" class="hidden md:inline-flex items-center gap-2 text-clinic-primary font-bold hover:text-clinic-primaryHover transition-colors border-b-2 border-transparent hover:border-clinic-primary pb-1">
                     View All Treatments <i class="fa-solid fa-arrow-right"></i>
@@ -458,12 +458,12 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1615287588147-7ce85f4007f3?q=80&w=600&auto=format&fit=crop" alt="Clinical Dermatology">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
+                            <span data-cms-id="treat1View" class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
-                        <h3 class="text-xl font-bold text-clinic-dark mb-3">Clinical Dermatology</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed flex-grow">Expert diagnosis and medical treatment for acne, eczema, and overall skin health.</p>
+                        <h3 data-cms-id="treat1Title" class="text-xl font-bold text-clinic-dark mb-3">Clinical Dermatology</h3>
+                        <p data-cms-id="treat1Desc" class="text-slate-600 text-sm leading-relaxed flex-grow">Expert diagnosis and medical treatment for acne, eczema, and overall skin health.</p>
                     </div>
                 </div>
 
@@ -471,12 +471,12 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop" alt="Laser Treatments">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
+                            <span data-cms-id="treat2View" class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
-                        <h3 class="text-xl font-bold text-clinic-dark mb-3">Laser Therapeutics</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed flex-grow">State-of-the-art laser technology for pigmentation removal and deep resurfacing.</p>
+                        <h3 data-cms-id="treat2Title" class="text-xl font-bold text-clinic-dark mb-3">Laser Therapeutics</h3>
+                        <p data-cms-id="treat2Desc" class="text-slate-600 text-sm leading-relaxed flex-grow">State-of-the-art laser technology for pigmentation removal and deep resurfacing.</p>
                     </div>
                 </div>
 
@@ -484,12 +484,12 @@
                     <div class="img-wrapper">
                         <img src="https://images.unsplash.com/photo-1620052568603-9975b31e9c20?q=80&w=600&auto=format&fit=crop" alt="Aesthetics">
                         <div class="overlay flex items-center justify-center">
-                            <span class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
+                            <span data-cms-id="treat3View" class="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">View Details</span>
                         </div>
                     </div>
                     <div class="p-8 flex flex-col flex-grow relative bg-white">
-                        <h3 class="text-xl font-bold text-clinic-dark mb-3">Aesthetic Sculpting</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed flex-grow">Subtle, natural-looking anti-aging treatments and premium dermal sculpting.</p>
+                        <h3 data-cms-id="treat3Title" class="text-xl font-bold text-clinic-dark mb-3">Aesthetic Sculpting</h3>
+                        <p data-cms-id="treat3Desc" class="text-slate-600 text-sm leading-relaxed flex-grow">Subtle, natural-looking anti-aging treatments and premium dermal sculpting.</p>
                     </div>
                 </div>
             </div>
@@ -547,6 +547,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="./cms-editor.js"></script>
 
     <script>
         // Mobile Menu Logic
@@ -611,7 +612,7 @@
     <!-- Firebase Integration Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB8yrl5GldsjZ36eutz8FlGcMO0PxurDQ8",
@@ -624,6 +625,11 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // Init Visual CMS Editor
+        if(window.initCms) {
+            window.initCms(db, getDoc, doc);
+        }
 
         // ------------------
         // BOOKING FORM LOGIC
