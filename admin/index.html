@@ -107,35 +107,44 @@
     <!-- ======================= -->
     <!-- APP LAYOUT -->
     <!-- ======================= -->
-    <div id="app-layout" class="min-h-screen flex">
+    <div id="app-layout" class="h-screen flex flex-col md:flex-row overflow-hidden">
         <!-- Sidebar -->
-        <aside class="w-64 glass-card border-r border-y-0 border-l-0 flex flex-col z-20">
-            <div class="p-6 border-b border-white/10">
-                <h2 class="text-xl font-display font-bold flex items-center gap-3">
-                    <i class="fa-solid fa-leaf text-cyan-400"></i> JJ Clinic
-                </h2>
-                <p class="text-xs text-slate-400 mt-1">Admin Ecosystem</p>
+        <aside class="w-full md:w-64 glass-card border-b md:border-b-0 md:border-r border-y-0 border-l-0 flex flex-col z-20 flex-shrink-0">
+            <div class="p-4 md:p-6 border-b border-white/10 flex justify-between items-center md:block">
+                <div>
+                    <h2 class="text-xl font-display font-bold flex items-center gap-3">
+                        <i class="fa-solid fa-leaf text-cyan-400"></i> JJ Clinic
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1 hidden md:block">Admin Ecosystem</p>
+                </div>
+                <button id="adminLogoutBtnMobile" class="md:hidden text-slate-400 hover:text-red-400 p-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-lg"></i>
+                </button>
             </div>
             
-            <nav class="flex-1 py-6 flex flex-col gap-2">
-                <button onclick="switchTab('dashboard')" class="nav-item active w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
+            <nav class="flex-none md:flex-1 py-2 md:py-6 flex flex-row md:flex-col gap-2 overflow-x-auto whitespace-nowrap px-2 md:px-0 hide-scrollbar">
+                <style>
+                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+                </style>
+                <button onclick="switchTab('dashboard')" class="nav-item active w-auto md:w-full text-left px-4 md:px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3 rounded-lg md:rounded-none">
                     <i class="fa-solid fa-chart-pie w-5"></i> Dashboard
                 </button>
-                <button onclick="switchTab('inquiries')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
-                    <i class="fa-solid fa-envelope-open-text w-5"></i> Inquiries <span id="inquiryBadge" class="ml-auto bg-cyan-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold hidden">New</span>
+                <button onclick="switchTab('inquiries')" class="nav-item w-auto md:w-full text-left px-4 md:px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3 rounded-lg md:rounded-none">
+                    <i class="fa-solid fa-envelope-open-text w-5"></i> Inquiries <span id="inquiryBadge" class="ml-auto md:ml-auto bg-cyan-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold hidden">New</span>
                 </button>
-                <button onclick="switchTab('patients')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
+                <button onclick="switchTab('patients')" class="nav-item w-auto md:w-full text-left px-4 md:px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3 rounded-lg md:rounded-none">
                     <i class="fa-solid fa-users w-5"></i> Patients
                 </button>
-                <button onclick="switchTab('labreports')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
+                <button onclick="switchTab('labreports')" class="nav-item w-auto md:w-full text-left px-4 md:px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3 rounded-lg md:rounded-none">
                     <i class="fa-solid fa-file-medical w-5"></i> Lab Reports
                 </button>
-                <button onclick="switchTab('cms')" class="nav-item w-full text-left px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3">
+                <button onclick="switchTab('cms')" class="nav-item w-auto md:w-full text-left px-4 md:px-6 py-3 text-slate-300 font-semibold hover:text-white transition-all flex items-center gap-3 rounded-lg md:rounded-none">
                     <i class="fa-solid fa-pen-to-square w-5"></i> Website CMS
                 </button>
             </nav>
 
-            <div class="p-6 border-t border-white/10">
+            <div class="p-6 border-t border-white/10 hidden md:block">
                 <button id="adminLogoutBtn" class="w-full text-left text-slate-400 hover:text-red-400 font-semibold transition-colors flex items-center gap-3">
                     <i class="fa-solid fa-arrow-right-from-bracket w-5"></i> Secure Logout
                 </button>
@@ -143,7 +152,7 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 overflow-y-auto h-screen relative z-10">
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto relative z-10">
             
             <!-- Dashboard Tab -->
             <div id="tab-dashboard" class="tab-content active">
@@ -501,12 +510,14 @@
         });
 
         // Logout
-        document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+        const doLogout = () => {
             sessionStorage.removeItem('admin_bypass');
             signOut(auth);
             document.getElementById('login-view').style.display = 'flex';
             document.getElementById('app-layout').style.display = 'none';
-        });
+        };
+        document.getElementById('adminLogoutBtn').addEventListener('click', doLogout);
+        document.getElementById('adminLogoutBtnMobile').addEventListener('click', doLogout);
 
         // Realtime Bookings Listener
         let initialLoadDone = false;

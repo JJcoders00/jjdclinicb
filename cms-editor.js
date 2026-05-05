@@ -57,7 +57,17 @@ window.initCms = async function(db, getDoc, docRef) {
             const data = docSnap.data();
             editableEls.forEach(el => {
                 const id = el.getAttribute('data-cms-id');
-                if (data[id]) el.innerHTML = data[id];
+                if (data[id]) {
+                    // Clean HTML from any accidentally saved editor styles
+                    let cleanHtml = data[id]
+                        .replace(/contenteditable="true"/g, '')
+                        .replace(/contenteditable="false"/g, '')
+                        .replace(/class="[^"]*cms-editable-active[^"]*"/g, '')
+                        .replace(/border:\s*1px dashed rgba\(13,\s*148,\s*136,\s*0\.4\);?/g, '')
+                        .replace(/border:\s*1px dashed rgba\(13,\s*148,\s*136,\s*1\);?/g, '')
+                        .replace(/background-color:\s*rgba\(13,\s*148,\s*136,\s*0\.05\);?/g, '');
+                    el.innerHTML = cleanHtml;
+                }
                 if (data[id + '_styles']) el.style.cssText += data[id + '_styles']; // Retain dragged sizes if any
             });
             imageEls.forEach(img => {
@@ -72,6 +82,26 @@ window.initCms = async function(db, getDoc, docRef) {
     // 4. Activate Visual Editor Mode
     if (isEditMode) {
         let currentMode = 'edit'; // 'edit' or 'nav'
+
+        // Inject CMS Global Styles for Editor
+        const editorStyle = document.createElement('style');
+        editorStyle.textContent = `
+            .cms-editable-active {
+                border: 1px dashed rgba(13, 148, 136, 0.4) !important;
+                outline: none !important;
+                transition: all 0.2s !important;
+                min-height: 1em !important;
+            }
+            .cms-editable-active:focus {
+                background-color: rgba(13, 148, 136, 0.05) !important;
+                border: 1px dashed rgba(13, 148, 136, 1) !important;
+            }
+            .cms-img-active {
+                outline: 3px dashed #0D9488 !important;
+                outline-offset: -3px !important;
+            }
+        `;
+        document.head.appendChild(editorStyle);
 
         // --- Custom Animated Modal System ---
         function showCmsModal({ title, body, confirmText, onConfirm, isDanger = false }) {
@@ -290,22 +320,16 @@ window.initCms = async function(db, getDoc, docRef) {
         function bindEditableLogic() {
             editableEls.forEach(el => {
                 el.setAttribute('contenteditable', 'true');
-                el.classList.add('outline-none', 'transition-all', 'duration-200');
-                el.style.border = '1px dashed rgba(13, 148, 136, 0.4)';
-                el.style.minHeight = '1em';
+                el.classList.add('cms-editable-active');
                 
                 el.addEventListener('focus', () => {
                     if(currentMode !== 'edit') return;
-                    el.style.backgroundColor = 'rgba(13, 148, 136, 0.05)';
-                    el.style.border = '1px dashed rgba(13, 148, 136, 1)';
                     toolbar.style.opacity = '1';
                     toolbar.style.transform = 'translate(-50%, 0) scale(1)';
                     toolbar.style.pointerEvents = 'auto';
                 });
                 el.addEventListener('blur', () => {
                     if(currentMode !== 'edit') return;
-                    el.style.backgroundColor = 'transparent';
-                    el.style.border = '1px dashed rgba(13, 148, 136, 0.4)';
                     setTimeout(() => {
                         if(document.activeElement.getAttribute('contenteditable') !== 'true') {
                             toolbar.style.opacity = '0';
@@ -317,8 +341,7 @@ window.initCms = async function(db, getDoc, docRef) {
             });
 
             imageEls.forEach(img => {
-                img.style.outline = '3px dashed #0D9488';
-                img.style.outlineOffset = '-3px';
+                img.classList.add('cms-img-active');
                 
                 // Double click to instantly open change URL modal
                 img.addEventListener('dblclick', (e) => {
@@ -369,10 +392,9 @@ window.initCms = async function(db, getDoc, docRef) {
                 // Disable editing styling
                 editableEls.forEach(el => {
                     el.setAttribute('contenteditable', 'false');
-                    el.style.border = 'none';
-                    el.style.backgroundColor = 'transparent';
+                    el.classList.remove('cms-editable-active');
                 });
-                imageEls.forEach(img => img.style.outline = 'none');
+                imageEls.forEach(img => img.classList.remove('cms-img-active'));
                 imgTools.style.opacity = '0';
                 imgTools.style.pointerEvents = 'none';
                 toolbar.style.opacity = '0';
@@ -388,9 +410,9 @@ window.initCms = async function(db, getDoc, docRef) {
                 // Enable editing styling
                 editableEls.forEach(el => {
                     el.setAttribute('contenteditable', 'true');
-                    el.style.border = '1px dashed rgba(13, 148, 136, 0.4)';
+                    el.classList.add('cms-editable-active');
                 });
-                imageEls.forEach(img => img.style.outline = '3px dashed #0D9488');
+                imageEls.forEach(img => img.classList.add('cms-img-active'));
             }
         };
 
@@ -419,7 +441,18 @@ window.initCms = async function(db, getDoc, docRef) {
                     saveBtn.disabled = true;
                     
                     const updates = {};
-                    editableEls.forEach(el => updates[el.getAttribute('data-cms-id')] = el.innerHTML);
+                    editableEls.forEach(el => {
+                        // Clean before saving just in case
+                        let rawHtml = el.innerHTML;
+                        let cleanHtml = rawHtml
+                            .replace(/contenteditable="true"/g, '')
+                            .replace(/contenteditable="false"/g, '')
+                            .replace(/class="[^"]*cms-editable-active[^"]*"/g, '')
+                            .replace(/border:\s*1px dashed rgba\(13,\s*148,\s*136,\s*0\.4\);?/g, '')
+                            .replace(/border:\s*1px dashed rgba\(13,\s*148,\s*136,\s*1\);?/g, '')
+                            .replace(/background-color:\s*rgba\(13,\s*148,\s*136,\s*0\.05\);?/g, '');
+                        updates[el.getAttribute('data-cms-id')] = cleanHtml;
+                    });
                     imageEls.forEach(img => {
                         updates[img.getAttribute('data-cms-id')] = img.src;
                         updates[img.getAttribute('data-cms-id') + '_width'] = img.style.width;
